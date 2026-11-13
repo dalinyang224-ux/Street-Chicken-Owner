@@ -1,0 +1,2950 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#7A1318" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Street Chicken — បោះដុំជ្រក់ជើងមាន់បែបចិន | Android Wholesale App</title>
+
+  <!-- Dynamic Android Icons & Web App Manifest -->
+  <link id="faviconLink" rel="icon" type="image/png" sizes="192x192" href="" />
+  <link id="appleTouchIconLink" rel="apple-touch-icon" sizes="192x192" href="" />
+  <link id="manifestLink" rel="manifest" href="" />
+
+  <!-- Google Fonts: Kantumruy Pro (Khmer), Cinzel (Imperial Serif), Plus Jakarta Sans (Tabular Numerals) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Kantumruy+Pro:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS via CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            silkIvory: '#FAF6EE',
+            parchment: '#F3ECE0',
+            cardSurface: '#FFFDF9',
+            cinnabar: '#7A1318',
+            cinnabarDark: '#5A0D11',
+            brandCrimson: '#A81C13',
+            brandBrown: '#4A180D',
+            apricotMedallion: '#F7AD55',
+            goldBurnished: '#B8893A',
+            goldBright: '#D4AF37',
+            goldHairline: '#E6D2A8',
+            jadeSeal: '#1E6B52',
+            inkCharcoal: '#231815',
+            bronzeMuted: '#6B5E53'
+          },
+          fontFamily: {
+            khmer: ['"Kantumruy Pro"', '"Plus Jakarta Sans"', 'sans-serif'],
+            royalDisplay: ['"Cinzel"', '"Kantumruy Pro"', 'serif'],
+            num: ['"Plus Jakarta Sans"', '"Kantumruy Pro"', 'sans-serif']
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* =====================================================================
+       ANDROID NATIVE ERGONOMICS, VIEWPORT & CHINESE ROYAL STYLING
+       ===================================================================== */
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100dvh;
+      overflow: hidden;
+      background-color: #FAF6EE;
+      color: #231815;
+      font-family: 'Kantumruy Pro', 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.62;
+      overscroll-behavior-y: contain;
+    }
+
+    /* Eliminate 300ms double-tap zoom delay in Chrome for Android */
+    button, a, input, select, textarea, [role="button"] {
+      touch-action: manipulation;
+    }
+
+    /* 48dp (48px) Minimum Android Touch Targets */
+    .android-touch {
+      min-height: 48px;
+    }
+    .android-touch-square {
+      min-width: 48px;
+      min-height: 48px;
+    }
+
+    .tabular-nums {
+      font-family: 'Plus Jakarta Sans', 'Kantumruy Pro', sans-serif;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Official Street Chicken Crimson & Brown Outlined Brand Typography */
+    .sc-title-stroke {
+      color: #A81C13;
+      -webkit-text-stroke: 1.15px #4A180D;
+      paint-order: stroke fill;
+      text-shadow: 0 1.5px 0 #4A180D;
+    }
+
+    .sc-title-stroke-gold {
+      color: #F7AD55;
+      -webkit-text-stroke: 1.35px #4A180D;
+      paint-order: stroke fill;
+      text-shadow: 0 2px 0 #4A180D;
+    }
+
+    .sc-khmer-stroke {
+      color: #A81C13;
+      -webkit-text-stroke: 0.7px #4A180D;
+      paint-order: stroke fill;
+    }
+
+    /* Chinese Royal 1px Double-Gold Hairline Cards */
+    .royal-card {
+      position: relative;
+      background-color: #FFFDF9;
+      border: 1px solid #E6D2A8;
+      box-shadow: 0 3px 12px -4px rgba(35, 24, 21, 0.06);
+    }
+    .royal-card::after {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border: 1px solid rgba(230, 210, 168, 0.55);
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    .royal-card-selected {
+      position: relative;
+      background-color: #FFFDF9;
+      border: 1.5px solid #B8893A;
+      box-shadow: 0 6px 18px -5px rgba(122, 19, 24, 0.14);
+    }
+    .royal-card-selected::after {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border: 1px solid rgba(184, 137, 58, 0.45);
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    /* Deep Imperial Cinnabar Plaque */
+    .imperial-plaque {
+      position: relative;
+      background: linear-gradient(155deg, #7A1318 0%, #5A0D11 100%);
+      border: 1.5px solid #D4AF37;
+      box-shadow: 0 12px 28px -10px rgba(90, 13, 17, 0.42);
+    }
+    .imperial-plaque::after {
+      content: '';
+      position: absolute;
+      inset: 5px;
+      border: 1px solid rgba(212, 175, 55, 0.5);
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    /* Scrollable App Content Canvas */
+    .android-scroll-area {
+      flex: 1 1 auto;
+      overflow-y: auto;
+      overflow-x: hidden;
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior-y: contain;
+      background-color: #FAF6EE;
+      background-image: radial-gradient(rgba(184, 137, 58, 0.1) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    .android-scroll-area::-webkit-scrollbar {
+      width: 4px;
+    }
+    .android-scroll-area::-webkit-scrollbar-thumb {
+      background: rgba(184, 137, 58, 0.35);
+      border-radius: 9999px;
+    }
+
+    /* Hide native number input spinners */
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+
+    /* Desktop Shell vs. Android Native Edge-to-Edge Viewport */
+    .desktop-stage {
+      width: 100%;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #FAF6EE;
+    }
+
+    .app-device-shell {
+      width: 100%;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      background-color: #FAF6EE;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .android-status-bar,
+    .android-gesture-bar,
+    .desktop-mode-bar {
+      display: none;
+    }
+
+    /* On Desktop Monitors (> 540px): Show sleek Android Flagship 412x915 punch-hole shell by default */
+    @media (min-width: 541px) {
+      .desktop-stage {
+        background:
+          radial-gradient(circle at 20% 15%, rgba(184, 137, 58, 0.16) 0%, transparent 45%),
+          radial-gradient(circle at 80% 85%, rgba(122, 19, 24, 0.14) 0%, transparent 45%),
+          #1C1614;
+        padding: 12px;
+      }
+
+      .desktop-mode-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        width: 100%;
+        max-width: 432px;
+        margin-bottom: 10px;
+        padding: 6px 12px;
+        border-radius: 9999px;
+        background: rgba(35, 24, 21, 0.9);
+        border: 1px solid rgba(212, 175, 55, 0.35);
+        color: #FAF6EE;
+        flex-shrink: 0;
+      }
+
+      .desktop-stage.mode-phone .app-device-shell {
+        width: 412px;
+        max-width: 100%;
+        height: min(915px, calc(100dvh - 64px));
+        border-radius: 38px;
+        border: 8px solid #141110;
+        box-shadow:
+          0 0 0 2px #B8893A,
+          0 28px 65px -12px rgba(0, 0, 0, 0.65);
+      }
+
+      .desktop-stage.mode-phone .android-status-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 30px;
+        padding: 0 20px;
+        background-color: #7A1318;
+        color: #FAF6EE;
+        font-size: 11.5px;
+        font-weight: 700;
+        position: relative;
+        flex-shrink: 0;
+      }
+
+      .desktop-stage.mode-phone .android-gesture-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 18px;
+        background-color: #FFFDF9;
+        flex-shrink: 0;
+      }
+
+      /* Full Width Desktop Mode Toggle State */
+      .desktop-stage.mode-full {
+        padding: 0;
+        background: #FAF6EE;
+      }
+
+      .desktop-stage.mode-full .desktop-mode-bar {
+        max-width: 680px;
+        margin-top: 8px;
+        margin-bottom: 8px;
+      }
+
+      .desktop-stage.mode-full .app-device-shell {
+        width: 100%;
+        max-width: 680px;
+        height: calc(100dvh - 54px);
+        border-radius: 24px 24px 0 0;
+        border: 1.5px solid #E6D2A8;
+        border-bottom: none;
+        box-shadow: 0 12px 40px -10px rgba(35, 24, 21, 0.14);
+      }
+    }
+
+    /* Bottom Sheet Slide-Up Animation */
+    @keyframes sheetSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-sheet-up {
+      animation: sheetSlideUp 0.24s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="desktopStage" class="desktop-stage mode-phone">
+
+    <!-- DESKTOP PREVIEW FRAME SWITCHER BAR (Hidden automatically on Android phones <= 540px) -->
+    <div class="desktop-mode-bar">
+      <div class="flex items-center gap-2 text-xs font-semibold text-goldHairline pl-1">
+        <span class="w-2 h-2 rounded-full bg-jadeSeal"></span>
+        <span>Android PWA Preview</span>
+      </div>
+      <div class="inline-flex items-center bg-black/50 p-0.5 rounded-full border border-goldBright/30">
+        <button type="button" id="btnFramePhone" onclick="setDesktopShellMode('phone')" class="px-3 py-1 rounded-full text-[11px] font-bold bg-goldBright text-cinnabarDark transition-all">
+          Android Phone Frame
+        </button>
+        <button type="button" id="btnFrameFull" onclick="setDesktopShellMode('full')" class="px-3 py-1 rounded-full text-[11px] font-bold text-silkIvory/80 hover:text-white transition-all">
+          Full Width
+        </button>
+      </div>
+    </div>
+
+    <!-- =================================================================== -->
+    <!-- ANDROID FLAGSHIP DEVICE SHELL (412x915px on Desktop / 100dvh Mobile) -->
+    <!-- =================================================================== -->
+    <div id="appDeviceShell" class="app-device-shell">
+
+      <!-- Simulated Android Punch-Hole Status Bar (Desktop Phone Frame Only) -->
+      <div class="android-status-bar">
+        <span id="androidClockText" class="tabular-nums">9:30</span>
+        <!-- Center Punch-Hole Camera -->
+        <div class="w-3.5 h-3.5 rounded-full bg-[#0D0A09] border border-white/15 shadow-inner"></div>
+        <!-- Android Signal, 5G, Wi-Fi & Battery Icons -->
+        <div class="flex items-center gap-1.5 text-[10.5px]">
+          <span class="font-num font-bold tracking-tight">5G</span>
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21 24 8.98C20.93 5.9 16.69 4 12 4z"/>
+          </svg>
+          <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M2 22h20V2z"/>
+          </svg>
+          <div class="w-5 h-2.5 rounded-[3px] border border-silkIvory/80 p-[1px] flex items-center">
+            <div class="w-full h-full bg-silkIvory rounded-[1px]"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- STICKY ANDROID TOP APP BAR                                        -->
+      <!-- ================================================================= -->
+      <header class="bg-cinnabar text-silkIvory px-3.5 py-2 border-b border-goldBright/50 shadow-sm flex-shrink-0 z-30" style="padding-top: max(8px, env(safe-area-inset-top));">
+        <div class="flex items-center justify-between gap-2">
+
+          <!-- Left: Street Chicken Medallion + Stacked Brand Name -->
+          <div class="flex items-center gap-2.5 min-w-0">
+            <div id="topBarLogoSlot" class="w-10 h-10 flex-shrink-0"></div>
+            <div class="min-w-0">
+              <div class="flex items-center gap-1.5">
+                <span class="font-royalDisplay font-bold text-sm sm:text-base tracking-wide text-goldBright leading-none truncate">
+                  Street Chicken
+                </span>
+              </div>
+              <p class="text-[11px] font-medium text-silkIvory/90 truncate mt-0.5">
+                បោះដុំជ្រក់ជើងមាន់បែបចិន
+              </p>
+            </div>
+          </div>
+
+          <!-- Right: Install App Chip + Language (ខ្មែរ/EN) + Currency (៛/$) -->
+          <div class="flex items-center gap-1.5 flex-shrink-0">
+            <!-- Install App Chip -->
+            <button type="button" id="installAppChipBtn" onclick="triggerAndroidInstall()" class="min-h-[36px] px-2.5 py-1 rounded-full bg-goldBright/20 hover:bg-goldBright/30 border border-goldBright/70 text-goldBright text-[11px] font-bold flex items-center gap-1 transition-colors" title="Install Android App">
+              <svg class="w-3.5 h-3.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+              </svg>
+              <span class="hidden xs:inline sm:inline" data-i18n="installChip">Install</span>
+            </button>
+
+            <!-- Language Toggle Pill -->
+            <div class="inline-flex items-center bg-cinnabarDark/90 p-0.5 rounded-full border border-goldBright/45">
+              <button type="button" id="langKmBtn" onclick="setLanguage('km')" class="min-h-[34px] px-2.5 rounded-full text-[11px] font-bold transition-all">
+                ខ្មែរ
+              </button>
+              <button type="button" id="langEnBtn" onclick="setLanguage('en')" class="min-h-[34px] px-2 rounded-full text-[11px] font-num font-bold transition-all">
+                EN
+              </button>
+            </div>
+
+            <!-- Currency Toggle Pill -->
+            <div class="inline-flex items-center bg-cinnabarDark/90 p-0.5 rounded-full border border-goldBright/45">
+              <button type="button" id="currKhrBtn" onclick="setCurrency('KHR')" class="min-h-[34px] px-2.5 rounded-full text-[11px] font-num font-bold transition-all">
+                ៛
+              </button>
+              <button type="button" id="currUsdBtn" onclick="setCurrency('USD')" class="min-h-[34px] px-2.5 rounded-full text-[11px] font-num font-bold transition-all">
+                $
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ================================================================= -->
+      <!-- SCROLLABLE VIEWPORT CONTENT AREA                                  -->
+      <!-- ================================================================= -->
+      <main id="androidScrollArea" class="android-scroll-area px-3.5 pt-3.5 pb-6 space-y-4">
+
+        <!-- =============================================================== -->
+        <!-- TAB 1: ORDER (កម្ម៉ង់)                                          -->
+        <!-- =============================================================== -->
+        <section id="tabPanelOrder" class="space-y-3.5 pb-24">
+
+          <!-- Imperial Hero Card with Official Street Chicken Emblem & Corner Fretwork -->
+          <div class="imperial-plaque rounded-2xl p-4 text-center text-silkIvory relative overflow-hidden">
+            <!-- Chinese Royal Corner Fretwork (回纹) -->
+            <svg class="absolute top-2.5 left-2.5 w-7 h-7 text-goldBright/75 pointer-events-none" viewBox="0 0 44 44" fill="none">
+              <path d="M2 34V2H34M2 10H26V26H10V16H20V21H15" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
+            <svg class="absolute top-2.5 right-2.5 w-7 h-7 text-goldBright/75 pointer-events-none" viewBox="0 0 44 44" fill="none">
+              <path d="M42 34V2H10M42 10H18V26H34V16H24V21H29" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
+            <svg class="absolute bottom-2.5 left-2.5 w-7 h-7 text-goldBright/75 pointer-events-none" viewBox="0 0 44 44" fill="none">
+              <path d="M2 10V42H34M2 34H26V18H10V28H20V23H15" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
+            <svg class="absolute bottom-2.5 right-2.5 w-7 h-7 text-goldBright/75 pointer-events-none" viewBox="0 0 44 44" fill="none">
+              <path d="M42 10V42H10M42 34H18V18H34V28H24V23H29" stroke="currentColor" stroke-width="1.6"/>
+            </svg>
+
+            <div class="relative z-10 flex flex-col items-center">
+              <!-- Top Imperial Seal Stamp -->
+              <span class="px-2.5 py-0.5 rounded bg-cinnabarDark/90 border border-goldBright/60 text-goldBright text-[10px] font-bold tracking-widest uppercase mb-2">
+                御製秘方 • IMPERIAL WHOLESALE
+              </span>
+
+              <!-- Official Street Chicken Logo Lockup -->
+              <div class="flex items-center gap-3.5 text-left">
+                <div id="heroLogoSlot" class="w-16 h-16 flex-shrink-0 drop-shadow-md"></div>
+                <div>
+                  <h1 class="font-royalDisplay font-bold text-xl tracking-wide sc-title-stroke-gold leading-tight">
+                    Street Chicken
+                  </h1>
+                  <p class="text-xs font-bold text-goldHairline mt-0.5">
+                    បោះដុំជ្រក់ជើងមាន់បែបចិន
+                  </p>
+                  <p class="text-[11px] font-semibold text-goldBright mt-1" data-i18n="heroMoqSub">
+                    តារាងតម្លៃបោះដុំ (យកចាប់ពី 10កញ្ចប់)
+                  </p>
+                </div>
+              </div>
+
+              <!-- Guarantee Banner -->
+              <div class="mt-3 pt-2.5 border-t border-goldBright/35 w-full">
+                <p class="text-xs font-bold text-goldHairline" data-i18n="heroGuarantee">
+                  ធានារសជាតិដើមបែបចិន ស្រួយ ឆ្ងាញ់ មិនហិលខ្លាំង
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Compact 10-Pack Wholesale MOQ Tracker & Starter Bundles -->
+          <div class="royal-card rounded-2xl p-3.5 space-y-2.5">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-xs font-bold text-inkCharcoal" data-i18n="moqTrackerHeading">
+                យកចាប់ពី 10កញ្ចប់ (Wholesale MOQ)
+              </span>
+              <span id="moqStatusPill" class="px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-cinnabar/10 text-cinnabar border border-cinnabar/30">
+                ខ្វះ 10 កញ្ចប់ទៀត
+              </span>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="space-y-1">
+              <div class="w-full h-2.5 bg-parchment rounded-full overflow-hidden border border-goldHairline">
+                <div id="moqProgressFill" class="h-full rounded-full bg-goldBurnished transition-all duration-300" style="width: 0%;"></div>
+              </div>
+              <div class="flex items-center justify-between text-[11px] font-semibold text-bronzeMuted tabular-nums">
+                <span id="moqWeightLabel">0.00 kg</span>
+                <span id="moqPackCountLabel" class="font-bold text-cinnabar">0 / 10 កញ្ចប់</span>
+              </div>
+            </div>
+
+            <!-- 1-Tap Starter Bundle Chips (48dp touch height) -->
+            <div class="pt-1 flex items-center gap-1.5 overflow-x-auto pb-0.5">
+              <button type="button" onclick="applyStarterBundle('starter10')" class="android-touch px-3 rounded-xl bg-parchment active:bg-goldHairline/60 border border-goldHairline text-inkCharcoal text-[11.5px] font-bold whitespace-nowrap flex-shrink-0">
+                10-Pack Starter
+              </button>
+              <button type="button" onclick="applyStarterBundle('shop25')" class="android-touch px-3 rounded-xl bg-parchment active:bg-goldHairline/60 border border-goldHairline text-inkCharcoal text-[11.5px] font-bold whitespace-nowrap flex-shrink-0">
+                25-Pack Shop
+              </button>
+              <button type="button" onclick="applyStarterBundle('agent50')" class="android-touch px-3 rounded-xl bg-parchment active:bg-goldHairline/60 border border-goldHairline text-inkCharcoal text-[11.5px] font-bold whitespace-nowrap flex-shrink-0">
+                50-Pack Agent
+              </button>
+              <button type="button" onclick="clearCart()" class="android-touch px-3 rounded-xl bg-cinnabar/10 active:bg-cinnabar/20 border border-cinnabar/30 text-cinnabar text-[11.5px] font-bold whitespace-nowrap flex-shrink-0" data-i18n="clearBtn">
+                សម្អាត
+              </button>
+            </div>
+          </div>
+
+          <!-- 4 Wholesale Pack Cards (48px Tactile Steppers) -->
+          <div id="orderPackCardsList" class="space-y-2.5">
+            <!-- Dynamically populated -->
+          </div>
+
+          <!-- Synchronized Delivery & Cooling Service Card on Order Screen -->
+          <div class="royal-card rounded-2xl p-3.5 space-y-3">
+            <div class="text-xs font-bold text-cinnabar border-b border-goldHairline pb-2" data-i18n="serviceAddonsTitle">
+              សេវាដឹកជញ្ជូន &amp; កញ្ចប់រក្សាភាពត្រជាក់ (Delivery &amp; Cooling)
+            </div>
+
+            <!-- Delivery Service Pill Toggle -->
+            <div class="flex items-center justify-between gap-2">
+              <div class="min-w-0">
+                <div class="text-xs font-bold text-inkCharcoal" data-i18n="deliveryLabel">សេវាដឹកជញ្ជូន (Delivery)</div>
+                <div id="orderDelivSub" class="tabular-nums text-[11px] text-bronzeMuted">$2.00 (8,000៛)</div>
+              </div>
+              <div class="inline-flex items-center bg-silkIvory p-0.5 rounded-xl border border-goldHairline flex-shrink-0">
+                <button type="button" id="orderDelivPaidBtn" onclick="setDeliveryOption('paid')" class="android-touch px-3 rounded-lg text-xs font-num font-bold transition-all">
+                  $2.00
+                </button>
+                <button type="button" id="orderDelivFreeBtn" onclick="setDeliveryOption('free')" class="android-touch px-3 rounded-lg text-xs font-bold transition-all" data-i18n="freeLabel">
+                  Free
+                </button>
+              </div>
+            </div>
+
+            <!-- Cooling Pack Pill Toggle -->
+            <div class="flex items-center justify-between gap-2 pt-2 border-t border-goldHairline/60">
+              <div class="min-w-0">
+                <div class="text-xs font-bold text-inkCharcoal" data-i18n="coolingLabel">កញ្ចប់រក្សាភាពត្រជាក់ (Cooling)</div>
+                <div id="orderCoolSub" class="tabular-nums text-[11px] text-bronzeMuted">$1.25 (5,000៛)</div>
+              </div>
+              <div class="inline-flex items-center bg-silkIvory p-0.5 rounded-xl border border-goldHairline flex-shrink-0">
+                <button type="button" id="orderCoolPaidBtn" onclick="setCoolingOption('paid')" class="android-touch px-3 rounded-lg text-xs font-num font-bold transition-all">
+                  $1.25
+                </button>
+                <button type="button" id="orderCoolFreeBtn" onclick="setCoolingOption('free')" class="android-touch px-3 rounded-lg text-xs font-bold transition-all" data-i18n="freeLabel">
+                  Free
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- TAB 2: RECEIPT (វិក្កយបត្រ)                                     -->
+        <!-- =============================================================== -->
+        <section id="tabPanelReceipt" class="hidden space-y-3.5 pb-6">
+
+          <!-- Customer / Reseller Input Card (Auto-saved to localStorage) -->
+          <div class="royal-card rounded-2xl p-3.5 space-y-3">
+            <div class="flex items-center justify-between border-b border-goldHairline pb-2">
+              <span class="text-xs font-bold text-cinnabar" data-i18n="custFormTitle">
+                ព័ត៌មានអតិថិជន / ហាង (Customer Info)
+              </span>
+              <span class="text-[10.5px] font-semibold text-bronzeMuted" data-i18n="autoSavedNote">រក្សាទុកស្វ័យប្រវត្តិ</span>
+            </div>
+
+            <div class="space-y-2.5">
+              <div>
+                <label for="custNameInput" class="block text-[11.5px] font-bold text-inkCharcoal mb-1" data-i18n="lblCustName">
+                  ឈ្មោះអតិថិជន / ហាង (Customer Name)
+                </label>
+                <input id="custNameInput" type="text" oninput="syncCustomerFields()" placeholder="ឧ. ហាង សុខា ម៉ាត" class="android-touch w-full bg-silkIvory border border-goldHairline rounded-xl px-3.5 text-sm text-inkCharcoal focus:outline-none focus:border-cinnabar" />
+              </div>
+
+              <div>
+                <label for="custPhoneInput" class="block text-[11.5px] font-bold text-inkCharcoal mb-1" data-i18n="lblCustPhone">
+                  លេខទូរស័ព្ទ / Telegram (Phone)
+                </label>
+                <input id="custPhoneInput" type="tel" oninput="syncCustomerFields()" placeholder="012 345 678" class="android-touch w-full tabular-nums bg-silkIvory border border-goldHairline rounded-xl px-3.5 text-sm text-inkCharcoal focus:outline-none focus:border-cinnabar" />
+              </div>
+
+              <div>
+                <label for="custAddressInput" class="block text-[11.5px] font-bold text-inkCharcoal mb-1" data-i18n="lblCustAddr">
+                  ទីតាំងដឹកជញ្ជូន / ខេត្ត (Address / Province)
+                </label>
+                <input id="custAddressInput" type="text" oninput="syncCustomerFields()" placeholder="ឧ. ទួលគោក ភ្នំពេញ ឬ ផ្ញើតាមវីរៈប៊ុនថាំ" class="android-touch w-full bg-silkIvory border border-goldHairline rounded-xl px-3.5 text-sm text-inkCharcoal focus:outline-none focus:border-cinnabar" />
+              </div>
+
+              <div>
+                <label for="custNoteInput" class="block text-[11.5px] font-bold text-inkCharcoal mb-1" data-i18n="lblCustNote">
+                  ចំណាំបន្ថែម (Note)
+                </label>
+                <input id="custNoteInput" type="text" oninput="syncCustomerFields()" placeholder="ឧ. ផ្ញើពេលរសៀល / ដាក់ទឹកកកបន្ថែម" class="android-touch w-full bg-silkIvory border border-goldHairline rounded-xl px-3.5 text-sm text-inkCharcoal focus:outline-none focus:border-cinnabar" />
+              </div>
+            </div>
+
+            <!-- Synced Delivery & Cooling Toggles on Receipt Screen -->
+            <div class="pt-2.5 border-t border-goldHairline/80 space-y-2.5">
+              <div class="flex items-center justify-between gap-2">
+                <div class="min-w-0">
+                  <div class="text-xs font-bold text-inkCharcoal" data-i18n="deliveryLabel">សេវាដឹកជញ្ជូន (Delivery)</div>
+                  <div id="recDelivSub" class="tabular-nums text-[11px] text-bronzeMuted">$2.00 (8,000៛)</div>
+                </div>
+                <div class="inline-flex items-center bg-silkIvory p-0.5 rounded-xl border border-goldHairline flex-shrink-0">
+                  <button type="button" id="recDelivPaidBtn" onclick="setDeliveryOption('paid')" class="android-touch px-3 rounded-lg text-xs font-num font-bold transition-all">
+                    $2.00
+                  </button>
+                  <button type="button" id="recDelivFreeBtn" onclick="setDeliveryOption('free')" class="android-touch px-3 rounded-lg text-xs font-bold transition-all" data-i18n="freeLabel">
+                    Free
+                  </button>
+                </div>
+              </div>
+
+              <div class="flex items-center justify-between gap-2 pt-2 border-t border-goldHairline/60">
+                <div class="min-w-0">
+                  <div class="text-xs font-bold text-inkCharcoal" data-i18n="coolingLabel">កញ្ចប់រក្សាភាពត្រជាក់ (Cooling)</div>
+                  <div id="recCoolSub" class="tabular-nums text-[11px] text-bronzeMuted">$1.25 (5,000៛)</div>
+                </div>
+                <div class="inline-flex items-center bg-silkIvory p-0.5 rounded-xl border border-goldHairline flex-shrink-0">
+                  <button type="button" id="recCoolPaidBtn" onclick="setCoolingOption('paid')" class="android-touch px-3 rounded-lg text-xs font-num font-bold transition-all">
+                    $1.25
+                  </button>
+                  <button type="button" id="recCoolFreeBtn" onclick="setCoolingOption('free')" class="android-touch px-3 rounded-lg text-xs font-bold transition-all" data-i18n="freeLabel">
+                    Free
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Live Chinese Royal Parchment Invoice Card -->
+          <div class="bg-parchment border-2 border-goldBurnished rounded-2xl p-4 shadow-md space-y-3 relative">
+            <!-- Corner Fretwork Accents -->
+            <div class="flex items-center justify-between gap-2.5 border-b border-goldHairline pb-3">
+              <div class="flex items-center gap-2.5 min-w-0">
+                <div id="receiptPreviewLogoSlot" class="w-12 h-12 flex-shrink-0"></div>
+                <div class="min-w-0">
+                  <div class="font-royalDisplay font-bold text-base leading-none sc-title-stroke truncate">
+                    Street Chicken
+                  </div>
+                  <div class="text-[11.5px] font-bold sc-khmer-stroke mt-0.5 truncate">
+                    បោះដុំជ្រក់ជើងមាន់បែបចិន
+                  </div>
+                </div>
+              </div>
+              <div class="text-right flex-shrink-0">
+                <span id="receiptInvoiceNum" class="tabular-nums inline-block px-2.5 py-0.5 rounded bg-cinnabar text-goldBright text-xs font-bold">
+                  #SC-1001
+                </span>
+                <div id="receiptDateText" class="tabular-nums text-[10.5px] text-bronzeMuted mt-0.5">
+                  --/--/----
+                </div>
+              </div>
+            </div>
+
+            <!-- Customer Summary Box -->
+            <div id="receiptCustBox" class="bg-cardSurface rounded-xl p-3 border border-goldHairline/80 text-xs space-y-1">
+              <!-- Populated dynamically -->
+            </div>
+
+            <!-- Itemized Breakdown -->
+            <div class="bg-cardSurface rounded-xl border border-goldHairline/80 overflow-hidden">
+              <div class="grid grid-cols-12 bg-silkIvory px-3 py-2 border-b border-goldHairline text-[11px] font-bold text-bronzeMuted">
+                <div class="col-span-5" data-i18n="colSize">ខ្នាតកញ្ចប់</div>
+                <div class="col-span-3 text-center" data-i18n="colQty">ចំនួន</div>
+                <div class="col-span-4 text-right" data-i18n="colTotal">តម្លៃសរុប</div>
+              </div>
+              <div id="receiptItemsList" class="divide-y divide-goldHairline/60 text-xs">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+
+            <!-- Subtotal & Service Lines -->
+            <div class="space-y-1.5 text-xs pt-0.5">
+              <div class="flex justify-between text-bronzeMuted">
+                <span data-i18n="goodsSubLabel">សរុបថ្លៃទំនិញ (Subtotal):</span>
+                <span id="recGoodsSubText" class="tabular-nums font-bold text-inkCharcoal">0៛ ($0.00)</span>
+              </div>
+              <div class="flex justify-between text-bronzeMuted">
+                <span data-i18n="deliveryLabel">សេវាដឹកជញ្ជូន (Delivery):</span>
+                <span id="recDelivLineText" class="tabular-nums font-bold text-inkCharcoal">$2.00 (8,000៛)</span>
+              </div>
+              <div class="flex justify-between text-bronzeMuted">
+                <span data-i18n="coolingLabel">កញ្ចប់រក្សាភាពត្រជាក់ (Cooling):</span>
+                <span id="recCoolLineText" class="tabular-nums font-bold text-inkCharcoal">$1.25 (5,000៛)</span>
+              </div>
+            </div>
+
+            <!-- Grand Total Banner -->
+            <div class="bg-cinnabar text-silkIvory rounded-xl p-3.5 border border-goldBright/75 flex items-center justify-between gap-2">
+              <div>
+                <div class="text-xs font-bold text-goldHairline" data-i18n="grandTotalLabel">
+                  សរុបទឹកប្រាក់ (Grand Total)
+                </div>
+                <div id="recWeightBadge" class="tabular-nums text-[11px] text-silkIvory/80 mt-0.5">
+                  0 កញ្ចប់ • 0.00 kg
+                </div>
+              </div>
+              <div class="text-right">
+                <div id="recGrandKHR" class="tabular-nums text-xl font-bold text-white leading-none">
+                  0៛
+                </div>
+                <div id="recGrandUSD" class="tabular-nums text-xs font-bold text-goldBright mt-1">
+                  $0.00 USD
+                </div>
+              </div>
+            </div>
+
+            <!-- Two Primary Receipt Actions (NO text-copy buttons) -->
+            <div class="space-y-2.5 pt-1">
+              <button type="button" onclick="openReceiptPhotoSheetFromCurrent()" class="android-touch w-full px-4 py-3 rounded-xl bg-cinnabar active:bg-cinnabarDark text-silkIvory border border-goldBright/80 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-sm">
+                <svg class="w-5 h-5 text-goldBright flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+                <span data-i18n="saveReceiptPhotoBtn">Save Receipt Photo (រក្សាទុកវិក្កយបត្រជារូបភាព)</span>
+              </button>
+
+              <button type="button" onclick="saveCurrentOrderToHistory()" class="android-touch w-full px-4 py-2.5 rounded-xl bg-jadeSeal active:opacity-90 text-white border border-goldBright/45 font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-sm">
+                <svg class="w-4 h-4 text-goldBright flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"/>
+                </svg>
+                <span data-i18n="saveToHistoryBtn">Save to History (រក្សាទុកក្នុងប្រវត្តិ)</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- TAB 3: PROFIT (ចំណេញ)                                          -->
+        <!-- =============================================================== -->
+        <section id="tabPanelProfit" class="hidden space-y-3.5 pb-6">
+
+          <!-- Empty Cart Sample Loader Prompt -->
+          <div id="profitEmptyBanner" class="hidden royal-card rounded-2xl p-3.5 bg-parchment/90 flex items-center justify-between gap-2.5">
+            <p class="text-xs font-semibold text-inkCharcoal" data-i18n="profitEmptyPrompt">
+              កន្ត្រកនៅទទេ — សាកល្បងគណនាប្រាក់ចំណេញជាមួយឈុត 20 កញ្ចប់?
+            </p>
+            <button type="button" onclick="loadSample20IntoCart()" class="android-touch px-3 rounded-xl bg-cinnabar text-goldBright text-xs font-bold whitespace-nowrap flex-shrink-0" data-i18n="loadSample20Btn">
+              Load 20 Packs
+            </button>
+          </div>
+
+          <!-- Net Profit & Margin KPI Grid -->
+          <div class="grid grid-cols-2 gap-2.5">
+            <div class="royal-card rounded-2xl p-3.5">
+              <div class="text-[11px] font-bold text-bronzeMuted" data-i18n="profitCostCard">ដើមទុនបោះដុំ + សេវា</div>
+              <div id="profitCostKHR" class="tabular-nums text-lg font-bold text-inkCharcoal mt-1">0៛</div>
+              <div id="profitCostUSD" class="tabular-nums text-[11px] text-bronzeMuted">$0.00</div>
+            </div>
+
+            <div class="royal-card rounded-2xl p-3.5">
+              <div class="text-[11px] font-bold text-bronzeMuted" data-i18n="profitRevCard">ចំណូលលក់រាយសរុប</div>
+              <div id="profitRevKHR" class="tabular-nums text-lg font-bold text-goldBurnished mt-1">0៛</div>
+              <div id="profitRevUSD" class="tabular-nums text-[11px] text-bronzeMuted">$0.00</div>
+            </div>
+
+            <div class="col-span-2 rounded-2xl bg-jadeSeal text-white p-4 border border-goldBright/75 flex items-center justify-between">
+              <div>
+                <div class="text-xs font-bold text-white/90" data-i18n="profitNetCard">ប្រាក់ចំណេញសុទ្ធ (Net Profit)</div>
+                <div id="profitMarginBadge" class="tabular-nums text-xs font-bold text-goldBright mt-0.5">Margin: 0.0%</div>
+              </div>
+              <div class="text-right">
+                <div id="profitNetKHR" class="tabular-nums text-2xl font-bold text-white leading-none">+0៛</div>
+                <div id="profitNetUSD" class="tabular-nums text-xs font-bold text-goldBright mt-1">+$0.00 USD</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 1-Tap Retail Strategy Presets -->
+          <div class="royal-card rounded-2xl p-3.5 space-y-3">
+            <div class="text-xs font-bold text-cinnabar" data-i18n="retailPresetsHeading">
+              ជ្រើសរើសប្រភេទហាងលក់រាយ (Retail Presets)
+            </div>
+            <div class="grid grid-cols-3 gap-1.5">
+              <button type="button" id="presetStallBtn" onclick="applyRetailPreset('stall')" class="android-touch px-2 py-1.5 rounded-xl border text-[11px] font-bold text-center leading-tight transition-all" data-i18n="presetStall">
+                Street Stall<br/>តូបលក់រាយ
+              </button>
+              <button type="button" id="presetMinimartBtn" onclick="applyRetailPreset('minimart')" class="android-touch px-2 py-1.5 rounded-xl border text-[11px] font-bold text-center leading-tight transition-all" data-i18n="presetMinimart">
+                Minimart<br/>ម៉ាត
+              </button>
+              <button type="button" id="presetOnlineBtn" onclick="applyRetailPreset('online')" class="android-touch px-2 py-1.5 rounded-xl border text-[11px] font-bold text-center leading-tight transition-all" data-i18n="presetOnline">
+                Online Delivery<br/>លក់អនឡាញ
+              </button>
+            </div>
+
+            <!-- Editable Retail Selling Prices per Pack Tier -->
+            <div class="pt-2 border-t border-goldHairline/80 space-y-2">
+              <div class="grid grid-cols-12 text-[11px] font-bold text-bronzeMuted px-1">
+                <div class="col-span-4" data-i18n="colSize">ខ្នាតកញ្ចប់</div>
+                <div class="col-span-4 text-right" data-i18n="colRetailInput">តម្លៃលក់រាយ (៛)</div>
+                <div class="col-span-4 text-right" data-i18n="colLineProfit">ចំណេញ</div>
+              </div>
+              <div id="profitRowsContainer" class="space-y-2">
+                <!-- Populated dynamically -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =============================================================== -->
+        <!-- TAB 4: HISTORY (ប្រវត្តិ)                                        -->
+        <!-- =============================================================== -->
+        <section id="tabPanelHistory" class="hidden space-y-3.5 pb-6">
+
+          <!-- Total Revenue Summary Header -->
+          <div class="imperial-plaque rounded-2xl p-4 text-silkIvory flex items-center justify-between">
+            <div>
+              <div class="text-[11px] font-bold text-goldHairline" data-i18n="historyTotalRevLabel">
+                ចំណូលបោះដុំសរុប (Total Saved Revenue)
+              </div>
+              <div id="historyTotalRevKHR" class="tabular-nums text-xl font-bold text-white mt-0.5">
+                0៛
+              </div>
+              <div id="historyTotalRevUSD" class="tabular-nums text-xs font-bold text-goldBright">
+                $0.00 USD
+              </div>
+            </div>
+            <div class="text-right">
+              <span id="historyCountPill" class="tabular-nums px-3 py-1 rounded-full bg-cinnabarDark border border-goldBright/60 text-goldBright text-xs font-bold">
+                0 វិក្កយបត្រ
+              </span>
+            </div>
+          </div>
+
+          <!-- Saved Orders List -->
+          <div id="historyOrdersList" class="space-y-3">
+            <!-- Populated dynamically -->
+          </div>
+        </section>
+
+      </main>
+
+      <!-- ================================================================= -->
+      <!-- FLOATING CHECKOUT BAR (ABOVE BOTTOM NAV ON ORDER TAB)             -->
+      <!-- ================================================================= -->
+      <div id="floatingCheckoutBar" class="bg-cinnabar text-silkIvory px-3.5 py-2.5 border-t border-goldBright/65 shadow-lg flex items-center justify-between gap-2.5 flex-shrink-0 z-20">
+        <div class="min-w-0">
+          <div class="flex items-center gap-1.5 text-[11px] text-goldHairline font-semibold">
+            <span id="checkoutBarPacks" class="tabular-nums font-bold text-white">0 កញ្ចប់</span>
+            <span>•</span>
+            <span id="checkoutBarAddons" class="tabular-nums truncate">+$3.25 សេវា</span>
+          </div>
+          <div class="flex items-baseline gap-2 mt-0.5">
+            <span id="checkoutBarGrandPrimary" class="tabular-nums text-lg font-bold text-white leading-none">
+              0៛
+            </span>
+            <span id="checkoutBarGrandSecondary" class="tabular-nums text-xs font-bold text-goldBright">
+              $0.00
+            </span>
+          </div>
+        </div>
+
+        <button type="button" onclick="switchTab('receipt')" class="android-touch px-4 rounded-xl bg-goldBright active:bg-goldBurnished text-cinnabarDark font-bold text-xs sm:text-sm flex items-center gap-1.5 shadow-sm flex-shrink-0">
+          <span data-i18n="createReceiptCta">Create Receipt / ចេញវិក្កយបត្រ</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" d="M9 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- ANDROID MATERIAL BOTTOM NAVIGATION BAR (4 TABS, 48dp+ TARGETS)    -->
+      <!-- ================================================================= -->
+      <nav class="bg-cardSurface border-t border-goldHairline px-1.5 py-1 grid grid-cols-4 gap-1 flex-shrink-0 z-30" style="padding-bottom: max(4px, env(safe-area-inset-bottom));" aria-label="Android Bottom Navigation">
+        <button type="button" id="navTabOrder" onclick="switchTab('order')" class="android-touch rounded-2xl flex flex-col items-center justify-center py-1 transition-all">
+          <div id="navPillOrder" class="px-3.5 py-1 rounded-full transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+            </svg>
+          </div>
+          <span class="text-[11px] font-bold mt-0.5" data-i18n="tabOrderLabel">កម្ម៉ង់</span>
+        </button>
+
+        <button type="button" id="navTabReceipt" onclick="switchTab('receipt')" class="android-touch rounded-2xl flex flex-col items-center justify-center py-1 transition-all">
+          <div id="navPillReceipt" class="px-3.5 py-1 rounded-full transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+          </div>
+          <span class="text-[11px] font-bold mt-0.5" data-i18n="tabReceiptLabel">វិក្កយបត្រ</span>
+        </button>
+
+        <button type="button" id="navTabProfit" onclick="switchTab('profit')" class="android-touch rounded-2xl flex flex-col items-center justify-center py-1 transition-all">
+          <div id="navPillProfit" class="px-3.5 py-1 rounded-full transition-colors">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
+          <span class="text-[11px] font-bold mt-0.5" data-i18n="tabProfitLabel">ចំណេញ</span>
+        </button>
+
+        <button type="button" id="navTabHistory" onclick="switchTab('history')" class="android-touch rounded-2xl flex flex-col items-center justify-center py-1 transition-all relative">
+          <div id="navPillHistory" class="px-3.5 py-1 rounded-full transition-colors relative">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.1" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span id="navHistoryBadge" class="hidden absolute -top-1 -right-1 min-w-[16px] h-4 px-1 rounded-full bg-cinnabar text-goldBright text-[10px] font-num font-bold flex items-center justify-center">0</span>
+          </div>
+          <span class="text-[11px] font-bold mt-0.5" data-i18n="tabHistoryLabel">ប្រវត្តិ</span>
+        </button>
+      </nav>
+
+      <!-- Android Gesture Navigation Pill (Desktop Phone Shell Only) -->
+      <div class="android-gesture-bar">
+        <div class="w-28 h-1 rounded-full bg-inkCharcoal/35"></div>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- ANDROID BOTTOM SHEET 1: RECEIPT PHOTO PNG PREVIEW & SHARE         -->
+      <!-- ================================================================= -->
+      <div id="receiptPhotoSheet" class="hidden absolute inset-0 z-50 bg-black/70 flex flex-col justify-end" onclick="if(event.target === this) closeReceiptPhotoSheet()">
+        <div class="bg-cardSurface border-t-2 border-goldBright rounded-t-3xl max-h-[90%] flex flex-col overflow-hidden shadow-2xl animate-sheet-up">
+          <!-- Drag Handle & Sheet Header -->
+          <div class="pt-2.5 pb-3 px-4 bg-cinnabar text-silkIvory flex flex-col items-center flex-shrink-0">
+            <div class="w-10 h-1 rounded-full bg-goldBright/60 mb-2"></div>
+            <div class="w-full flex items-center justify-between gap-2">
+              <div>
+                <h3 class="text-sm font-bold text-goldBright" data-i18n="sheetPhotoTitle">
+                  រូបភាពវិក្កយបត្រ (Receipt Photo PNG)
+                </h3>
+                <p class="text-[11px] text-silkIvory/85" data-i18n="sheetPhotoSub">
+                  ចែករំលែកទៅ Telegram / Messenger ឬទាញយករូបភាព PNG
+                </p>
+              </div>
+              <button type="button" onclick="closeReceiptPhotoSheet()" class="android-touch-square rounded-full bg-cinnabarDark text-goldBright font-bold text-sm flex items-center justify-center">
+                ✕
+              </button>
+            </div>
+          </div>
+
+          <!-- Crisp 2x Retina PNG Preview -->
+          <div class="flex-1 overflow-y-auto bg-parchment p-3.5 flex justify-center items-start">
+            <img id="receiptPhotoImg" src="" alt="Street Chicken Receipt PNG" class="w-full max-w-sm h-auto rounded-2xl shadow-lg border border-goldBurnished/60" />
+          </div>
+
+          <!-- Share Photo & Download PNG Actions -->
+          <div class="p-3.5 bg-cardSurface border-t border-goldHairline grid grid-cols-2 gap-2.5 flex-shrink-0" style="padding-bottom: max(14px, env(safe-area-inset-bottom));">
+            <button type="button" onclick="shareReceiptPhotoAndroid()" class="android-touch px-3 rounded-xl bg-cinnabar active:bg-cinnabarDark text-silkIvory border border-goldBright/75 font-bold text-xs flex items-center justify-center gap-1.5">
+              <svg class="w-4 h-4 text-goldBright flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
+              </svg>
+              <span data-i18n="sharePhotoBtn">Share Photo</span>
+            </button>
+
+            <a id="downloadReceiptPngLink" href="" download="StreetChicken-Receipt.png" onclick="showToast(t('toastPngSaved'))" class="android-touch px-3 rounded-xl bg-jadeSeal active:opacity-90 text-white border border-goldBright/50 font-bold text-xs flex items-center justify-center gap-1.5">
+              <svg class="w-4 h-4 text-goldBright flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+              </svg>
+              <span data-i18n="downloadPngBtn">Download PNG</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- ANDROID BOTTOM SHEET 2: CHROME ANDROID INSTALL GUIDE              -->
+      <!-- ================================================================= -->
+      <div id="installGuideSheet" class="hidden absolute inset-0 z-50 bg-black/70 flex flex-col justify-end" onclick="if(event.target === this) closeInstallGuideSheet()">
+        <div class="bg-cardSurface border-t-2 border-goldBright rounded-t-3xl p-5 space-y-4 shadow-2xl animate-sheet-up" style="padding-bottom: max(20px, env(safe-area-inset-bottom));">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <div id="installModalLogoSlot" class="w-12 h-12 flex-shrink-0"></div>
+              <div>
+                <h3 class="text-base font-bold text-cinnabar" data-i18n="installSheetTitle">
+                  ដំឡើងកម្មវិធីលើទូរស័ព្ទ Android
+                </h3>
+                <p class="text-xs text-bronzeMuted">Street Chicken Wholesale App</p>
+              </div>
+            </div>
+            <button type="button" onclick="closeInstallGuideSheet()" class="android-touch-square rounded-full bg-parchment text-inkCharcoal font-bold text-sm flex items-center justify-center">
+              ✕
+            </button>
+          </div>
+
+          <div class="bg-silkIvory rounded-2xl p-4 border border-goldHairline space-y-2.5 text-xs text-inkCharcoal">
+            <div class="flex items-start gap-2.5">
+              <span class="w-5 h-5 rounded-full bg-cinnabar text-goldBright font-num font-bold text-[11px] flex items-center justify-center flex-shrink-0 mt-0.5">1</span>
+              <p data-i18n="installStep1">បើកតំណភ្ជាប់នេះនៅក្នុងកម្មវិធី <strong>Google Chrome</strong> លើទូរស័ព្ទ Android របស់អ្នក។</p>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <span class="w-5 h-5 rounded-full bg-cinnabar text-goldBright font-num font-bold text-[11px] flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
+              <p data-i18n="installStep2">ចុចលើសញ្ញាចុចបី <strong>(⋮)</strong> នៅជ្រុងខាងស្តាំផ្នែកខាងលើនៃ Chrome។</p>
+            </div>
+            <div class="flex items-start gap-2.5">
+              <span class="w-5 h-5 rounded-full bg-cinnabar text-goldBright font-num font-bold text-[11px] flex items-center justify-center flex-shrink-0 mt-0.5">3</span>
+              <p data-i18n="installStep3">ជ្រើសរើស <strong>"Add to Home screen"</strong> ឬ <strong>"Install app"</strong> ដើម្បីដាក់រូបតំណាង Street Chicken លើអេក្រង់ដើម។</p>
+            </div>
+          </div>
+
+          <button type="button" onclick="closeInstallGuideSheet()" class="android-touch w-full rounded-xl bg-cinnabar text-goldBright font-bold text-sm">
+            <span data-i18n="gotItBtn">យល់ព្រម (Got It)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ================================================================= -->
+      <!-- ANDROID BOTTOM SHEET 3: DELETE CONFIRMATION DIALOG                -->
+      <!-- ================================================================= -->
+      <div id="deleteConfirmSheet" class="hidden absolute inset-0 z-50 bg-black/70 flex flex-col justify-end" onclick="if(event.target === this) closeDeleteConfirmSheet()">
+        <div class="bg-cardSurface border-t-2 border-goldBurnished rounded-t-3xl p-5 space-y-4 shadow-2xl animate-sheet-up" style="padding-bottom: max(20px, env(safe-area-inset-bottom));">
+          <div>
+            <h4 class="text-base font-bold text-cinnabar" data-i18n="delSheetTitle">
+              លុបវិក្កយបត្រនេះចេញពីប្រវត្តិ?
+            </h4>
+            <p class="text-xs text-bronzeMuted mt-1" data-i18n="delSheetDesc">
+              តើអ្នកពិតជាចង់លុបវិក្កយបត្រនេះមែនទេ? សកម្មភាពនេះមិនអាចត្រឡប់ក្រោយវិញបានទេ។
+            </p>
+          </div>
+          <div class="grid grid-cols-2 gap-2.5">
+            <button type="button" onclick="closeDeleteConfirmSheet()" class="android-touch rounded-xl bg-parchment border border-goldHairline text-inkCharcoal font-bold text-xs" data-i18n="cancelBtn">
+              បោះបង់ (Cancel)
+            </button>
+            <button type="button" id="confirmDeleteSheetBtn" class="android-touch rounded-xl bg-cinnabar text-white font-bold text-xs" data-i18n="deleteBtn">
+              លុបចោល (Delete)
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- IN-SHELL TOAST SNACKBAR -->
+      <div id="androidToastHost" class="pointer-events-none absolute bottom-20 left-3.5 right-3.5 z-50 flex flex-col items-center gap-1.5"></div>
+
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- COMPLETE SELF-CONTAINED JAVASCRIPT APPLICATION ENGINE                 -->
+  <!-- ===================================================================== -->
+  <script>
+    // -----------------------------------------------------------------------
+    // 1. OFFICIAL STREET CHICKEN SVG & CANVAS EMBLEM RENDERERS
+    // -----------------------------------------------------------------------
+    function getStreetChickenMedallionSVG(sizeClass) {
+      return (
+        '<svg viewBox="0 0 200 200" class="' + (sizeClass || 'w-full h-full') + '" xmlns="http://www.w3.org/2000/svg">' +
+          // Concentric Imperial Cinnabar (#7A1318) & Burnished Gold (#B8893A) Rings
+          '<circle cx="100" cy="100" r="96" fill="#7A1318"/>' +
+          '<circle cx="100" cy="100" r="90" fill="none" stroke="#D4AF37" stroke-width="3.2"/>' +
+          // Warm Golden-Apricot Medallion (#F7AD55)
+          '<circle cx="100" cy="100" r="84" fill="#F7AD55"/>' +
+          '<circle cx="100" cy="100" r="79" fill="none" stroke="#B8893A" stroke-width="1.5"/>' +
+
+          // Ceramic Bowl Back Rim & Deep Crimson Spicy Broth (#A81C13)
+          '<ellipse cx="100" cy="106" rx="56" ry="20" fill="#EFE5D1" stroke="#4A180D" stroke-width="3.5"/>' +
+          '<ellipse cx="100" cy="108" rx="50" ry="15.5" fill="#A81C13" stroke="#4A180D" stroke-width="2.2"/>' +
+          '<ellipse cx="100" cy="110" rx="40" ry="11" fill="#89130C"/>' +
+
+          // Center Golden-Tan Chicken Foot (#E1914B) with Red Chili-Oil Speckles
+          '<g transform="translate(104, 74) rotate(12) scale(0.96, 1.04)">' +
+            '<path d="M-8 28 L-9 6 Q-24 3 -27 -7 Q-28 -12 -23 -11 Q-17 -9 -11 -3 Q-16 -22 -13 -31 Q-11 -35 -7 -31 Q-5 -22 -3 -9 Q0 -26 4 -34 Q7 -37 10 -32 Q9 -21 5 -8 Q15 -20 21 -25 Q25 -26 24 -21 Q19 -12 10 2 L9 28 Z" fill="#E1914B" stroke="#4A180D" stroke-width="2.8" stroke-linejoin="round"/>' +
+            '<path d="M-17 -5 L-13 -7 M-10 -18 L-6 -18 M2 -20 L6 -19 M13 -13 L17 -11 M-4 11 L4 11" stroke="#7A2E14" stroke-width="1.6" stroke-linecap="round"/>' +
+            '<circle cx="-3" cy="3" r="2.2" fill="#D9381E"/>' +
+            '<circle cx="4" cy="7" r="1.8" fill="#D9381E"/>' +
+            '<circle cx="-5" cy="16" r="2" fill="#D9381E"/>' +
+            '<circle cx="2" cy="-2" r="1.7" fill="#D9381E"/>' +
+          '</g>' +
+
+          // Red Chili Pepper #1 (#DC261B) with Green Calyx Stem (#2E7D32)
+          '<g transform="translate(97, 94) rotate(-32)">' +
+            '<path d="M-16 2 Q-2 -6 17 -1 Q2 7 -16 2 Z" fill="#DC261B" stroke="#4A180D" stroke-width="2.2" stroke-linejoin="round"/>' +
+            '<path d="M15 -1 L22 -4" stroke="#2E7D32" stroke-width="2.6" stroke-linecap="round"/>' +
+          '</g>' +
+
+          // Left Golden-Tan Chicken Foot
+          '<g transform="translate(75, 86) rotate(-28) scale(0.94, 0.98)">' +
+            '<path d="M-8 28 L-9 6 Q-24 3 -27 -7 Q-28 -12 -23 -11 Q-17 -9 -11 -3 Q-16 -22 -13 -31 Q-11 -35 -7 -31 Q-5 -22 -3 -9 Q0 -26 4 -34 Q7 -37 10 -32 Q9 -21 5 -8 Q15 -20 21 -25 Q25 -26 24 -21 Q19 -12 10 2 L9 28 Z" fill="#E1914B" stroke="#4A180D" stroke-width="2.8" stroke-linejoin="round"/>' +
+            '<path d="M-17 -5 L-13 -7 M-10 -18 L-6 -18 M2 -20 L6 -19 M13 -13 L17 -11 M-4 11 L4 11" stroke="#7A2E14" stroke-width="1.6" stroke-linecap="round"/>' +
+            '<circle cx="-3" cy="3" r="2.2" fill="#D9381E"/>' +
+            '<circle cx="4" cy="7" r="1.8" fill="#D9381E"/>' +
+          '</g>' +
+
+          // Right Golden-Tan Chicken Foot
+          '<g transform="translate(126, 90) rotate(38) scale(0.92, 0.96)">' +
+            '<path d="M-8 28 L-9 6 Q-24 3 -27 -7 Q-28 -12 -23 -11 Q-17 -9 -11 -3 Q-16 -22 -13 -31 Q-11 -35 -7 -31 Q-5 -22 -3 -9 Q0 -26 4 -34 Q7 -37 10 -32 Q9 -21 5 -8 Q15 -20 21 -25 Q25 -26 24 -21 Q19 -12 10 2 L9 28 Z" fill="#E1914B" stroke="#4A180D" stroke-width="2.8" stroke-linejoin="round"/>' +
+            '<path d="M-17 -5 L-13 -7 M-10 -18 L-6 -18 M2 -20 L6 -19 M13 -13 L17 -11 M-4 11 L4 11" stroke="#7A2E14" stroke-width="1.6" stroke-linecap="round"/>' +
+            '<circle cx="-3" cy="3" r="2.2" fill="#D9381E"/>' +
+            '<circle cx="4" cy="7" r="1.8" fill="#D9381E"/>' +
+          '</g>' +
+
+          // Red Chili Pepper #2
+          '<g transform="translate(115, 111) rotate(-14)">' +
+            '<path d="M-15 2 Q0 -5 16 0 Q1 7 -15 2 Z" fill="#DC261B" stroke="#4A180D" stroke-width="2.1" stroke-linejoin="round"/>' +
+            '<path d="M14 0 L20 -3" stroke="#2E7D32" stroke-width="2.5" stroke-linecap="round"/>' +
+          '</g>' +
+
+          // Curved Ceramic Foot Base (#DFD1B8)
+          '<path d="M79 152 L82 161 Q100 165 118 161 L121 152 Z" fill="#DFD1B8" stroke="#4A180D" stroke-width="3" stroke-linejoin="round"/>' +
+
+          // Cream Ceramic Bowl Front Body (#EFE5D1)
+          '<path d="M44 106 Q100 122 156 106 C155 139 134 155 100 155 C66 155 45 139 44 106 Z" fill="#EFE5D1"/>' +
+          '<path d="M52 135 Q100 148 148 135 C140 149 122 155 100 155 C78 155 60 149 52 135 Z" fill="#DFD1B8"/>' +
+          '<path d="M44 106 Q100 122 156 106 C155 139 134 155 100 155 C66 155 45 139 44 106 Z" fill="none" stroke="#4A180D" stroke-width="3.5" stroke-linejoin="round"/>' +
+
+          // Khmer Bowl Inscription "ជ្រក់ជើងមាន់បែបចិន"
+          '<text x="100" y="136" text-anchor="middle" fill="#6E2B19" font-family="Kantumruy Pro, sans-serif" font-weight="700" font-size="9.5">ជ្រក់ជើងមាន់បែបចិន</text>' +
+        '</svg>'
+      );
+    }
+
+    function drawStreetChickenEmblemOnCanvas(ctx, cx, cy, radius) {
+      ctx.save();
+      ctx.translate(cx, cy);
+      var s = radius / 100;
+      ctx.scale(s, s);
+
+      // Outer Imperial Cinnabar Ring (#7A1318) & Burnished Gold Ring (#B8893A)
+      ctx.beginPath();
+      ctx.arc(0, 0, 96, 0, Math.PI * 2);
+      ctx.fillStyle = '#7A1318';
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(0, 0, 90, 0, Math.PI * 2);
+      ctx.lineWidth = 3.5;
+      ctx.strokeStyle = '#D4AF37';
+      ctx.stroke();
+
+      // Golden-Apricot Medallion (#F7AD55)
+      ctx.beginPath();
+      ctx.arc(0, 0, 84, 0, Math.PI * 2);
+      ctx.fillStyle = '#F7AD55';
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(0, 0, 80, 0, Math.PI * 2);
+      ctx.lineWidth = 1.6;
+      ctx.strokeStyle = '#B8893A';
+      ctx.stroke();
+
+      // Cream Ceramic Bowl Back Rim & Deep Crimson Broth (#A81C13)
+      ctx.beginPath();
+      ctx.ellipse(0, 6, 56, 20, 0, 0, Math.PI * 2);
+      ctx.fillStyle = '#EFE5D1';
+      ctx.fill();
+      ctx.lineWidth = 3.4;
+      ctx.strokeStyle = '#4A180D';
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.ellipse(0, 8, 50, 16, 0, 0, Math.PI * 2);
+      ctx.fillStyle = '#A81C13';
+      ctx.fill();
+      ctx.lineWidth = 2.2;
+      ctx.strokeStyle = '#4A180D';
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.ellipse(0, 10, 40, 11, 0, 0, Math.PI * 2);
+      ctx.fillStyle = '#89130C';
+      ctx.fill();
+
+      // Chicken Foot Helper (#E1914B)
+      var drawFoot = function (x, y, angleDeg, sx, sy) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate((angleDeg * Math.PI) / 180);
+        ctx.scale(sx, sy);
+
+        ctx.fillStyle = '#E1914B';
+        ctx.strokeStyle = '#4A180D';
+        ctx.lineWidth = 2.8;
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+
+        ctx.beginPath();
+        ctx.moveTo(-8, 28);
+        ctx.lineTo(-9, 6);
+        ctx.quadraticCurveTo(-24, 3, -27, -7);
+        ctx.quadraticCurveTo(-28, -12, -23, -11);
+        ctx.quadraticCurveTo(-17, -9, -11, -3);
+        ctx.quadraticCurveTo(-16, -22, -13, -31);
+        ctx.quadraticCurveTo(-11, -35, -7, -31);
+        ctx.quadraticCurveTo(-5, -22, -3, -9);
+        ctx.quadraticCurveTo(0, -26, 4, -34);
+        ctx.quadraticCurveTo(7, -37, 10, -32);
+        ctx.quadraticCurveTo(9, -21, 5, -8);
+        ctx.quadraticCurveTo(15, -20, 21, -25);
+        ctx.quadraticCurveTo(25, -26, 24, -21);
+        ctx.quadraticCurveTo(19, -12, 10, 2);
+        ctx.lineTo(9, 28);
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+
+        ctx.strokeStyle = '#7A2E14';
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(-17, -5); ctx.lineTo(-13, -7);
+        ctx.moveTo(-10, -18); ctx.lineTo(-6, -18);
+        ctx.moveTo(2, -20); ctx.lineTo(6, -19);
+        ctx.moveTo(13, -13); ctx.lineTo(17, -11);
+        ctx.moveTo(-4, 11); ctx.lineTo(4, 11);
+        ctx.stroke();
+
+        ctx.fillStyle = '#D9381E';
+        var speckles = [[-3, 3, 2.2], [4, 7, 1.8], [-5, 16, 2.0], [2, -2, 1.7], [-10, -11, 1.5], [5, -13, 1.6]];
+        for (var i = 0; i < speckles.length; i++) {
+          ctx.beginPath();
+          ctx.arc(speckles[i][0], speckles[i][1], speckles[i][2], 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      };
+
+      drawFoot(4, -26, 12, 0.96, 1.04);
+
+      // Red Chili Pepper #1 (#DC261B) + Green Calyx (#2E7D32)
+      ctx.save();
+      ctx.translate(-3, -6);
+      ctx.rotate((-32 * Math.PI) / 180);
+      ctx.beginPath();
+      ctx.moveTo(-16, 2);
+      ctx.quadraticCurveTo(-2, -6, 17, -1);
+      ctx.quadraticCurveTo(2, 7, -16, 2);
+      ctx.fillStyle = '#DC261B';
+      ctx.fill();
+      ctx.lineWidth = 2.2;
+      ctx.strokeStyle = '#4A180D';
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(15, -1);
+      ctx.lineTo(22, -4);
+      ctx.lineWidth = 2.6;
+      ctx.strokeStyle = '#2E7D32';
+      ctx.stroke();
+      ctx.restore();
+
+      drawFoot(-25, -14, -28, 0.94, 0.98);
+      drawFoot(26, -10, 38, 0.92, 0.96);
+
+      // Red Chili Pepper #2
+      ctx.save();
+      ctx.translate(15, 11);
+      ctx.rotate((-14 * Math.PI) / 180);
+      ctx.beginPath();
+      ctx.moveTo(-15, 2);
+      ctx.quadraticCurveTo(0, -5, 16, 0);
+      ctx.quadraticCurveTo(1, 7, -15, 2);
+      ctx.fillStyle = '#DC261B';
+      ctx.fill();
+      ctx.lineWidth = 2.1;
+      ctx.strokeStyle = '#4A180D';
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(14, 0);
+      ctx.lineTo(20, -3);
+      ctx.lineWidth = 2.5;
+      ctx.strokeStyle = '#2E7D32';
+      ctx.stroke();
+      ctx.restore();
+
+      // Ceramic Foot Base
+      ctx.beginPath();
+      ctx.moveTo(-21, 52);
+      ctx.lineTo(-18, 61);
+      ctx.quadraticCurveTo(0, 65, 18, 61);
+      ctx.lineTo(21, 52);
+      ctx.closePath();
+      ctx.fillStyle = '#DFD1B8';
+      ctx.fill();
+      ctx.lineWidth = 3;
+      ctx.strokeStyle = '#4A180D';
+      ctx.stroke();
+
+      // Cream Ceramic Bowl Front Body (#EFE5D1)
+      ctx.beginPath();
+      ctx.moveTo(-56, 6);
+      ctx.quadraticCurveTo(0, 22, 56, 6);
+      ctx.bezierCurveTo(55, 39, 34, 55, 0, 55);
+      ctx.bezierCurveTo(-34, 55, -55, 39, -56, 6);
+      ctx.closePath();
+      ctx.fillStyle = '#EFE5D1';
+      ctx.fill();
+
+      ctx.save();
+      ctx.clip();
+      ctx.beginPath();
+      ctx.ellipse(0, 48, 56, 18, 0, 0, Math.PI * 2);
+      ctx.fillStyle = '#DFD1B8';
+      ctx.fill();
+      ctx.restore();
+
+      ctx.beginPath();
+      ctx.moveTo(-56, 6);
+      ctx.quadraticCurveTo(0, 22, 56, 6);
+      ctx.bezierCurveTo(55, 39, 34, 55, 0, 55);
+      ctx.bezierCurveTo(-34, 55, -55, 39, -56, 6);
+      ctx.closePath();
+      ctx.lineWidth = 3.4;
+      ctx.strokeStyle = '#4A180D';
+      ctx.stroke();
+
+      // Etched Khmer Bowl Inscription
+      ctx.fillStyle = '#6E2B19';
+      ctx.font = '700 9.5px "Kantumruy Pro", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('ជ្រក់ជើងមាន់បែបចិន', 0, 34);
+
+      ctx.restore();
+    }
+
+    function generateIconDataUrl(size) {
+      var canvas = document.createElement('canvas');
+      canvas.width = size;
+      canvas.height = size;
+      var ctx = canvas.getContext('2d');
+      if (!ctx) return '';
+
+      // Warm Silk Ivory / Apricot Icon Tile
+      ctx.fillStyle = '#7A1318';
+      ctx.fillRect(0, 0, size, size);
+      drawStreetChickenEmblemOnCanvas(ctx, size / 2, size / 2, size * 0.45);
+      return canvas.toDataURL('image/png');
+    }
+
+    function initAndroidPWAAndLogos() {
+      var logoSlots = ['topBarLogoSlot', 'heroLogoSlot', 'receiptPreviewLogoSlot', 'installModalLogoSlot'];
+      logoSlots.forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.innerHTML = getStreetChickenMedallionSVG('w-full h-full');
+      });
+
+      try {
+        var icon192 = generateIconDataUrl(192);
+        var icon512 = generateIconDataUrl(512);
+
+        if (icon192) {
+          var fav = document.getElementById('faviconLink');
+          var apple = document.getElementById('appleTouchIconLink');
+          if (fav) fav.href = icon192;
+          if (apple) apple.href = icon192;
+        }
+
+        // Dynamic Android Web App Manifest Blob
+        var manifestObj = {
+          name: 'Street Chicken Wholesale',
+          short_name: 'Street Chicken',
+          description: 'បោះដុំជ្រក់ជើងមាន់បែបចិន — Wholesale Chinese-Style Pickled Chicken Feet',
+          start_url: '.',
+          display: 'standalone',
+          orientation: 'portrait',
+          background_color: '#FAF6EE',
+          theme_color: '#7A1318',
+          icons: [
+            { src: icon192, sizes: '192x192', type: 'image/png', purpose: 'any maskable' },
+            { src: icon512, sizes: '512x512', type: 'image/png', purpose: 'any maskable' }
+          ]
+        };
+        var blob = new Blob([JSON.stringify(manifestObj)], { type: 'application/manifest+json' });
+        var manifestUrl = URL.createObjectURL(blob);
+        var manifestLink = document.getElementById('manifestLink');
+        if (manifestLink) manifestLink.href = manifestUrl;
+      } catch (err) {
+        // Safe fallback in restricted sandboxes
+      }
+    }
+
+    // Android Install Prompt Handling
+    var deferredAndroidPrompt = null;
+    window.addEventListener('beforeinstallprompt', function (e) {
+      e.preventDefault();
+      deferredAndroidPrompt = e;
+      var chip = document.getElementById('installAppChipBtn');
+      if (chip) {
+        chip.classList.add('animate-pulse');
+      }
+    });
+
+    function triggerAndroidInstall() {
+      if (deferredAndroidPrompt) {
+        try {
+          deferredAndroidPrompt.prompt();
+          deferredAndroidPrompt.userChoice.then(function () {
+            deferredAndroidPrompt = null;
+          });
+          return;
+        } catch (err) {
+          // Fall back to bottom sheet guide
+        }
+      }
+      document.getElementById('installGuideSheet').classList.remove('hidden');
+    }
+
+    function closeInstallGuideSheet() {
+      document.getElementById('installGuideSheet').classList.add('hidden');
+    }
+
+    // -----------------------------------------------------------------------
+    // 2. EXACT WHOLESALE TIERS & CONSTANTS (1 USD = 4,000 KHR)
+    // -----------------------------------------------------------------------
+    var EXCHANGE_RATE = 4000;
+    var MOQ_MIN_PACKS = 10;
+    var DELIVERY_FEE_KHR = 8000; // $2.00
+    var COOLING_FEE_KHR = 5000;  // $1.25
+    var STORAGE_KEY = 'street_chicken_android_pwa_v1';
+
+    var WHOLESALE_TIERS = [
+      {
+        id: 'tier_105g',
+        grams: 105,
+        weightKm: '105g / កញ្ចប់',
+        weightEn: '105g / Pack',
+        priceKHR: 3500,
+        unitRateKm: '3,333៛ / 100g',
+        unitRateEn: '3,333៛ per 100g',
+        bestValue: false,
+        retailPresets: { stall: 5000, minimart: 5500, online: 6000 }
+      },
+      {
+        id: 'tier_250g',
+        grams: 250,
+        weightKm: '250g / កញ្ចប់',
+        weightEn: '250g / Pack',
+        priceKHR: 8000,
+        unitRateKm: '3,200៛ / 100g',
+        unitRateEn: '3,200៛ per 100g',
+        bestValue: false,
+        retailPresets: { stall: 11000, minimart: 12000, online: 13000 }
+      },
+      {
+        id: 'tier_500g',
+        grams: 500,
+        weightKm: '500g / កញ្ចប់',
+        weightEn: '500g / Pack',
+        priceKHR: 16000,
+        unitRateKm: '3,200៛ / 100g',
+        unitRateEn: '3,200៛ per 100g',
+        bestValue: false,
+        retailPresets: { stall: 22000, minimart: 24000, online: 25000 }
+      },
+      {
+        id: 'tier_1000g',
+        grams: 1000,
+        weightKm: '1000g / កញ្ចប់',
+        weightEn: '1000g / Pack',
+        priceKHR: 30000,
+        unitRateKm: '3,000៛ / 100g',
+        unitRateEn: '3,000៛ per 100g',
+        bestValue: true,
+        retailPresets: { stall: 40000, minimart: 43000, online: 45000 }
+      }
+    ];
+
+    // -----------------------------------------------------------------------
+    // 3. BILINGUAL DICTIONARY (KHMER DEFAULT & ENGLISH)
+    // -----------------------------------------------------------------------
+    var I18N = {
+      km: {
+        installChip: 'ដំឡើង',
+        heroMoqSub: 'តារាងតម្លៃបោះដុំ (យកចាប់ពី 10កញ្ចប់)',
+        heroGuarantee: 'ធានារសជាតិដើមបែបចិន ស្រួយ ឆ្ងាញ់ មិនហិលខ្លាំង',
+        moqTrackerHeading: 'យកចាប់ពី 10កញ្ចប់ (Wholesale MOQ)',
+        clearBtn: 'សម្អាត',
+        serviceAddonsTitle: 'សេវាដឹកជញ្ជូន & កញ្ចប់រក្សាភាពត្រជាក់ (Delivery & Cooling)',
+        deliveryLabel: 'សេវាដឹកជញ្ជូន (Delivery)',
+        coolingLabel: 'កញ្ចប់រក្សាភាពត្រជាក់ (Cooling)',
+        freeLabel: 'Free (ឥតគិតថ្លៃ)',
+        custFormTitle: 'ព័ត៌មានអតិថិជន / ហាង (Customer Info)',
+        autoSavedNote: 'រក្សាទុកស្វ័យប្រវត្តិ',
+        lblCustName: 'ឈ្មោះអតិថិជន / ហាង (Customer Name)',
+        lblCustPhone: 'លេខទូរស័ព្ទ / Telegram (Phone)',
+        lblCustAddr: 'ទីតាំងដឹកជញ្ជូន / ខេត្ត (Address / Province)',
+        lblCustNote: 'ចំណាំបន្ថែម (Note)',
+        colSize: 'ខ្នាតកញ្ចប់',
+        colQty: 'ចំនួន',
+        colTotal: 'តម្លៃសរុប',
+        goodsSubLabel: 'សរុបថ្លៃទំនិញ (Subtotal):',
+        grandTotalLabel: 'សរុបទឹកប្រាក់ (Grand Total)',
+        saveReceiptPhotoBtn: 'Save Receipt Photo (រក្សាទុកវិក្កយបត្រជារូបភាព)',
+        saveToHistoryBtn: 'Save to History (រក្សាទុកក្នុងប្រវត្តិ)',
+        profitEmptyPrompt: 'កន្ត្រកនៅទទេ — សាកល្បងគណនាប្រាក់ចំណេញជាមួយឈុត 20 កញ្ចប់?',
+        loadSample20Btn: 'Load 20 Packs',
+        profitCostCard: 'ដើមទុនបោះដុំ + សេវា',
+        profitRevCard: 'ចំណូលលក់រាយសរុប',
+        profitNetCard: 'ប្រាក់ចំណេញសុទ្ធ (Net Profit)',
+        retailPresetsHeading: 'ជ្រើសរើសប្រភេទហាងលក់រាយ (Retail Presets)',
+        colRetailInput: 'តម្លៃលក់រាយ (៛)',
+        colLineProfit: 'ចំណេញ',
+        historyTotalRevLabel: 'ចំណូលបោះដុំសរុប (Total Saved Revenue)',
+        createReceiptCta: 'Create Receipt / ចេញវិក្កយបត្រ',
+        tabOrderLabel: 'កម្ម៉ង់',
+        tabReceiptLabel: 'វិក្កយបត្រ',
+        tabProfitLabel: 'ចំណេញ',
+        tabHistoryLabel: 'ប្រវត្តិ',
+        sheetPhotoTitle: 'រូបភាពវិក្កយបត្រ (Receipt Photo PNG)',
+        sheetPhotoSub: 'ចែករំលែកទៅ Telegram / Messenger ឬទាញយករូបភាព PNG',
+        sharePhotoBtn: 'ចែករំលែករូបភាព (Share)',
+        downloadPngBtn: 'ទាញយក PNG (Download)',
+        installSheetTitle: 'ដំឡើងកម្មវិធីលើទូរស័ព្ទ Android',
+        installStep1: 'បើកតំណភ្ជាប់នេះនៅក្នុងកម្មវិធី Google Chrome លើទូរស័ព្ទ Android របស់អ្នក។',
+        installStep2: 'ចុចលើសញ្ញាចុចបី (⋮) នៅជ្រុងខាងស្តាំផ្នែកខាងលើនៃ Chrome។',
+        installStep3: 'ជ្រើសរើស "Add to Home screen" ឬ "Install app" ដើម្បីដាក់រូបតំណាង Street Chicken លើអេក្រង់ដើម។',
+        gotItBtn: 'យល់ព្រម (Got It)',
+        delSheetTitle: 'លុបវិក្កយបត្រនេះចេញពីប្រវត្តិ?',
+        delSheetDesc: 'តើអ្នកពិតជាចង់លុបវិក្កយបត្រនេះមែនទេ? សកម្មភាពនេះមិនអាចត្រឡប់ក្រោយវិញបានទេ។',
+        cancelBtn: 'បោះបង់ (Cancel)',
+        deleteBtn: 'លុបចោល (Delete)',
+        toastBundleApplied: 'បានបញ្ចូលឈុតបោះដុំរួចរាល់!',
+        toastCartCleared: 'បានសម្អាតចំនួនកញ្ចប់រួចរាល់។',
+        toastNeed1Pack: 'សូមជ្រើសរើសយ៉ាងតិច 1 កញ្ចប់ជាមុនសិន!',
+        toastPhotoReady: 'បានបង្កើតរូបភាពវិក្កយបត្រ PNG រួចរាល់!',
+        toastPngSaved: 'កំពុងទាញយករូបភាពវិក្កយបត្រ PNG...',
+        toastSavedHistory: 'បានរក្សាទុកវិក្កយបត្រចូលក្នុងប្រវត្តិរួចរាល់!',
+        toastOrderLoaded: 'បានផ្ទុកទិន្នន័យវិក្កយបត្រចូលក្នុងកន្ត្រក!',
+        toastOrderDeleted: 'បានលុបវិក្កយបត្រចេញពីប្រវត្តិ។'
+      },
+      en: {
+        installChip: 'Install',
+        heroMoqSub: 'Wholesale Price List (Minimum 10 Packs)',
+        heroGuarantee: 'Authentic Chinese Original Recipe — Crispy, Delicious, Mildly Spicy',
+        moqTrackerHeading: 'Minimum 10 Packs (Wholesale MOQ)',
+        clearBtn: 'Clear',
+        serviceAddonsTitle: 'Delivery Service & Cooling Pack Options',
+        deliveryLabel: 'Delivery Service',
+        coolingLabel: 'Cooling Pack',
+        freeLabel: 'Free',
+        custFormTitle: 'Customer / Reseller Info',
+        autoSavedNote: 'Auto-saved',
+        lblCustName: 'Customer / Shop Name',
+        lblCustPhone: 'Phone Number / Telegram',
+        lblCustAddr: 'Delivery Address / Province',
+        lblCustNote: 'Additional Note',
+        colSize: 'Pack Size',
+        colQty: 'Qty',
+        colTotal: 'Amount',
+        goodsSubLabel: 'Goods Subtotal:',
+        grandTotalLabel: 'Grand Total',
+        saveReceiptPhotoBtn: 'Save Receipt Photo (រក្សាទុកវិក្កយបត្រជារូបភាព)',
+        saveToHistoryBtn: 'Save to History (រក្សាទុកក្នុងប្រវត្តិ)',
+        profitEmptyPrompt: 'Cart is empty — load a 20-pack sample to preview margins?',
+        loadSample20Btn: 'Load 20 Packs',
+        profitCostCard: 'Wholesale + Service Cost',
+        profitRevCard: 'Projected Retail Revenue',
+        profitNetCard: 'Net Profit (ប្រាក់ចំណេញសុទ្ធ)',
+        retailPresetsHeading: 'Reseller Retail Price Presets',
+        colRetailInput: 'Retail Price (៛)',
+        colLineProfit: 'Profit',
+        historyTotalRevLabel: 'Total Saved Wholesale Revenue',
+        createReceiptCta: 'Create Receipt / ចេញវិក្កយបត្រ',
+        tabOrderLabel: 'Order',
+        tabReceiptLabel: 'Receipt',
+        tabProfitLabel: 'Profit',
+        tabHistoryLabel: 'History',
+        sheetPhotoTitle: 'Receipt Photo (PNG)',
+        sheetPhotoSub: 'Share directly to Telegram / Messenger or download PNG',
+        sharePhotoBtn: 'Share Photo',
+        downloadPngBtn: 'Download PNG',
+        installSheetTitle: 'Install on Android Home Screen',
+        installStep1: 'Open this page in Google Chrome on your Android phone.',
+        installStep2: 'Tap the three-dot menu icon (⋮) in the top-right corner of Chrome.',
+        installStep3: 'Tap "Add to Home screen" or "Install app" to place the Street Chicken icon on your Home Screen.',
+        gotItBtn: 'Got It',
+        delSheetTitle: 'Delete this saved receipt?',
+        delSheetDesc: 'Are you sure you want to remove this receipt from your offline history?',
+        cancelBtn: 'Cancel',
+        deleteBtn: 'Delete',
+        toastBundleApplied: 'Starter bundle applied!',
+        toastCartCleared: 'Pack quantities cleared.',
+        toastNeed1Pack: 'Please add at least 1 pack first!',
+        toastPhotoReady: 'High-resolution PNG receipt generated!',
+        toastPngSaved: 'Downloading PNG receipt image...',
+        toastSavedHistory: 'Order saved to offline History!',
+        toastOrderLoaded: 'Order loaded back into cart!',
+        toastOrderDeleted: 'Saved receipt deleted.'
+      }
+    };
+
+    // -----------------------------------------------------------------------
+    // 4. APPLICATION STATE & SAFE LOCALSTORAGE PERSISTENCE
+    // -----------------------------------------------------------------------
+    function getDefaultState() {
+      return {
+        lang: 'km',
+        currency: 'KHR',
+        activeTab: 'order', // 'order' | 'receipt' | 'profit' | 'history'
+        desktopShellMode: 'phone', // 'phone' | 'full'
+        deliveryOption: 'paid', // 'paid' ($2.00 / 8,000៛) | 'free' (0៛)
+        coolingOption: 'paid',  // 'paid' ($1.25 / 5,000៛) | 'free' (0៛)
+        retailPreset: 'stall',
+        cart: {
+          tier_105g: 0,
+          tier_250g: 0,
+          tier_500g: 0,
+          tier_1000g: 0
+        },
+        customer: {
+          name: '',
+          phone: '',
+          address: '',
+          note: ''
+        },
+        retailPrices: {
+          tier_105g: 5000,
+          tier_250g: 11000,
+          tier_500g: 22000,
+          tier_1000g: 40000
+        },
+        history: []
+      };
+    }
+
+    function loadAppState() {
+      var def = getDefaultState();
+      try {
+        var raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          var parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === 'object') {
+            return {
+              lang: parsed.lang === 'en' ? 'en' : 'km',
+              currency: parsed.currency === 'USD' ? 'USD' : 'KHR',
+              activeTab: ['order', 'receipt', 'profit', 'history'].indexOf(parsed.activeTab) !== -1 ? parsed.activeTab : 'order',
+              desktopShellMode: parsed.desktopShellMode === 'full' ? 'full' : 'phone',
+              deliveryOption: parsed.deliveryOption === 'free' ? 'free' : 'paid',
+              coolingOption: parsed.coolingOption === 'free' ? 'free' : 'paid',
+              retailPreset: parsed.retailPreset || 'stall',
+              cart: Object.assign({}, def.cart, parsed.cart || {}),
+              customer: Object.assign({}, def.customer, parsed.customer || {}),
+              retailPrices: Object.assign({}, def.retailPrices, parsed.retailPrices || {}),
+              history: Array.isArray(parsed.history) ? parsed.history : []
+            };
+          }
+        }
+      } catch (err) {
+        console.warn('localStorage load fallback:', err);
+      }
+      return def;
+    }
+
+    function saveAppState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      } catch (err) {
+        console.warn('localStorage save fallback:', err);
+      }
+    }
+
+    var state = loadAppState();
+    var currentReceiptPngDataUrl = '';
+    var currentReceiptFilename = 'StreetChicken-Receipt.png';
+    var pendingDeleteOrderId = null;
+
+    function t(key) {
+      return (I18N[state.lang] && I18N[state.lang][key]) || I18N.km[key] || key;
+    }
+
+    function fmtKHR(amount) {
+      return Math.round(amount).toLocaleString('en-US') + '៛';
+    }
+
+    function fmtUSD(khrAmount) {
+      return '$' + (khrAmount / EXCHANGE_RATE).toFixed(2);
+    }
+
+    function fmtPrimary(khrAmount) {
+      return state.currency === 'KHR' ? fmtKHR(khrAmount) : fmtUSD(khrAmount);
+    }
+
+    function fmtSecondary(khrAmount) {
+      return state.currency === 'KHR' ? fmtUSD(khrAmount) : fmtKHR(khrAmount);
+    }
+
+    function escapeHTML(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // -----------------------------------------------------------------------
+    // 5. CART & SERVICE ADD-ON CALCULATIONS
+    // -----------------------------------------------------------------------
+    function computeOrderTotals() {
+      var totalPacks = 0;
+      var totalGrams = 0;
+      var goodsSubtotalKHR = 0;
+      var items = [];
+
+      WHOLESALE_TIERS.forEach(function (tier) {
+        var qty = state.cart[tier.id] || 0;
+        if (qty > 0) {
+          var lineKHR = qty * tier.priceKHR;
+          var lineGrams = qty * tier.grams;
+          totalPacks += qty;
+          totalGrams += lineGrams;
+          goodsSubtotalKHR += lineKHR;
+          items.push({
+            id: tier.id,
+            grams: tier.grams,
+            weightKm: tier.weightKm,
+            weightEn: tier.weightEn,
+            priceKHR: tier.priceKHR,
+            qty: qty,
+            lineKHR: lineKHR,
+            lineGrams: lineGrams
+          });
+        }
+      });
+
+      var deliveryKHR = state.deliveryOption === 'paid' ? DELIVERY_FEE_KHR : 0;
+      var coolingKHR = state.coolingOption === 'paid' ? COOLING_FEE_KHR : 0;
+      var serviceFeesKHR = deliveryKHR + coolingKHR;
+      var grandTotalKHR = totalPacks > 0 ? (goodsSubtotalKHR + serviceFeesKHR) : 0;
+
+      return {
+        totalPacks: totalPacks,
+        totalGrams: totalGrams,
+        goodsSubtotalKHR: goodsSubtotalKHR,
+        deliveryOption: state.deliveryOption,
+        coolingOption: state.coolingOption,
+        deliveryKHR: deliveryKHR,
+        coolingKHR: coolingKHR,
+        serviceFeesKHR: serviceFeesKHR,
+        grandTotalKHR: grandTotalKHR,
+        moqMet: totalPacks >= MOQ_MIN_PACKS,
+        remainingMoq: Math.max(0, MOQ_MIN_PACKS - totalPacks),
+        items: items
+      };
+    }
+
+    function changeQty(tierId, delta) {
+      var current = state.cart[tierId] || 0;
+      state.cart[tierId] = Math.max(0, current + delta);
+      saveAppState();
+      renderAll();
+    }
+
+    function setDirectQty(tierId, rawVal) {
+      var parsed = parseInt(rawVal, 10);
+      state.cart[tierId] = isNaN(parsed) || parsed < 0 ? 0 : parsed;
+      saveAppState();
+      renderAll();
+    }
+
+    function applyStarterBundle(bundleKey) {
+      if (bundleKey === 'starter10') {
+        state.cart = { tier_105g: 4, tier_250g: 4, tier_500g: 2, tier_1000g: 0 };
+      } else if (bundleKey === 'shop25') {
+        state.cart = { tier_105g: 10, tier_250g: 8, tier_500g: 5, tier_1000g: 2 };
+      } else if (bundleKey === 'agent50') {
+        state.cart = { tier_105g: 15, tier_250g: 15, tier_500g: 12, tier_1000g: 8 };
+      }
+      saveAppState();
+      renderAll();
+      showToast(t('toastBundleApplied'));
+    }
+
+    function clearCart() {
+      state.cart = { tier_105g: 0, tier_250g: 0, tier_500g: 0, tier_1000g: 0 };
+      saveAppState();
+      renderAll();
+      showToast(t('toastCartCleared'));
+    }
+
+    function setDeliveryOption(mode) {
+      state.deliveryOption = mode === 'free' ? 'free' : 'paid';
+      saveAppState();
+      renderAll();
+    }
+
+    function setCoolingOption(mode) {
+      state.coolingOption = mode === 'free' ? 'free' : 'paid';
+      saveAppState();
+      renderAll();
+    }
+
+    // -----------------------------------------------------------------------
+    // 6. MAIN RENDER PIPELINE
+    // -----------------------------------------------------------------------
+    function renderAll() {
+      document.documentElement.lang = state.lang;
+
+      // Desktop Phone Frame vs Full Width Mode
+      var stageEl = document.getElementById('desktopStage');
+      var phoneBtn = document.getElementById('btnFramePhone');
+      var fullBtn = document.getElementById('btnFrameFull');
+      if (state.desktopShellMode === 'full') {
+        stageEl.className = 'desktop-stage mode-full';
+        fullBtn.className = 'px-3 py-1 rounded-full text-[11px] font-bold bg-goldBright text-cinnabarDark transition-all';
+        phoneBtn.className = 'px-3 py-1 rounded-full text-[11px] font-bold text-silkIvory/80 hover:text-white transition-all';
+      } else {
+        stageEl.className = 'desktop-stage mode-phone';
+        phoneBtn.className = 'px-3 py-1 rounded-full text-[11px] font-bold bg-goldBright text-cinnabarDark transition-all';
+        fullBtn.className = 'px-3 py-1 rounded-full text-[11px] font-bold text-silkIvory/80 hover:text-white transition-all';
+      }
+
+      // Static Bilingual Text Updates
+      document.querySelectorAll('[data-i18n]').forEach(function (el) {
+        el.textContent = t(el.getAttribute('data-i18n'));
+      });
+
+      // Language Toggle Styles
+      var langKmBtn = document.getElementById('langKmBtn');
+      var langEnBtn = document.getElementById('langEnBtn');
+      if (state.lang === 'km') {
+        langKmBtn.className = 'min-h-[34px] px-2.5 rounded-full text-[11px] font-bold transition-all bg-goldBright text-cinnabarDark';
+        langEnBtn.className = 'min-h-[34px] px-2 rounded-full text-[11px] font-num font-bold transition-all text-silkIvory/80';
+      } else {
+        langEnBtn.className = 'min-h-[34px] px-2.5 rounded-full text-[11px] font-num font-bold transition-all bg-goldBright text-cinnabarDark';
+        langKmBtn.className = 'min-h-[34px] px-2 rounded-full text-[11px] font-bold transition-all text-silkIvory/80';
+      }
+
+      // Currency Toggle Styles
+      var currKhrBtn = document.getElementById('currKhrBtn');
+      var currUsdBtn = document.getElementById('currUsdBtn');
+      if (state.currency === 'KHR') {
+        currKhrBtn.className = 'min-h-[34px] px-2.5 rounded-full text-[11px] font-num font-bold transition-all bg-goldBright text-cinnabarDark';
+        currUsdBtn.className = 'min-h-[34px] px-2.5 rounded-full text-[11px] font-num font-bold transition-all text-silkIvory/80';
+      } else {
+        currUsdBtn.className = 'min-h-[34px] px-2.5 rounded-full text-[11px] font-num font-bold transition-all bg-goldBright text-cinnabarDark';
+        currKhrBtn.className = 'min-h-[34px] px-2.5 rounded-full text-[11px] font-num font-bold transition-all text-silkIvory/80';
+      }
+
+      // Bottom Navigation Tabs & Panels
+      var tabs = [
+        { key: 'order', panel: 'tabPanelOrder', btn: 'navTabOrder', pill: 'navPillOrder' },
+        { key: 'receipt', panel: 'tabPanelReceipt', btn: 'navTabReceipt', pill: 'navPillReceipt' },
+        { key: 'profit', panel: 'tabPanelProfit', btn: 'navTabProfit', pill: 'navPillProfit' },
+        { key: 'history', panel: 'tabPanelHistory', btn: 'navTabHistory', pill: 'navPillHistory' }
+      ];
+
+      tabs.forEach(function (item) {
+        var panelEl = document.getElementById(item.panel);
+        var btnEl = document.getElementById(item.btn);
+        var pillEl = document.getElementById(item.pill);
+        var isActive = state.activeTab === item.key;
+
+        if (isActive) {
+          panelEl.classList.remove('hidden');
+          btnEl.className = 'android-touch rounded-2xl flex flex-col items-center justify-center py-1 text-cinnabar transition-all';
+          pillEl.className = 'px-3.5 py-1 rounded-full bg-cinnabar/15 text-cinnabar transition-colors relative';
+        } else {
+          panelEl.classList.add('hidden');
+          btnEl.className = 'android-touch rounded-2xl flex flex-col items-center justify-center py-1 text-bronzeMuted transition-all';
+          pillEl.className = 'px-3.5 py-1 rounded-full text-bronzeMuted transition-colors relative';
+        }
+      });
+
+      // Floating Checkout Bar visibility (shown on Order tab)
+      var checkoutBar = document.getElementById('floatingCheckoutBar');
+      if (state.activeTab === 'order') {
+        checkoutBar.classList.remove('hidden');
+      } else {
+        checkoutBar.classList.add('hidden');
+      }
+
+      // History Badge Count
+      var badgeEl = document.getElementById('navHistoryBadge');
+      if (state.history.length > 0) {
+        badgeEl.textContent = state.history.length;
+        badgeEl.classList.remove('hidden');
+      } else {
+        badgeEl.classList.add('hidden');
+      }
+
+      var totals = computeOrderTotals();
+      renderOrderScreen(totals);
+      renderReceiptScreen(totals);
+      renderProfitScreen(totals);
+      renderHistoryScreen();
+    }
+
+    // -----------------------------------------------------------------------
+    // 7. TAB 1 RENDER: ORDER SCREEN
+    // -----------------------------------------------------------------------
+    function renderOrderScreen(totals) {
+      // MOQ Tracker
+      var moqPill = document.getElementById('moqStatusPill');
+      var moqFill = document.getElementById('moqProgressFill');
+      var moqWeight = document.getElementById('moqWeightLabel');
+      var moqCount = document.getElementById('moqPackCountLabel');
+
+      var pct = Math.min(100, Math.round((totals.totalPacks / MOQ_MIN_PACKS) * 100));
+      moqFill.style.width = pct + '%';
+      moqWeight.textContent = (totals.totalGrams / 1000).toFixed(2) + ' kg';
+      moqCount.textContent = totals.totalPacks + ' / ' + MOQ_MIN_PACKS + (state.lang === 'km' ? ' កញ្ចប់' : ' packs');
+
+      if (totals.moqMet) {
+        moqFill.className = 'h-full rounded-full bg-jadeSeal transition-all duration-300';
+        moqPill.className = 'px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-jadeSeal/15 text-jadeSeal border border-jadeSeal/35';
+        moqPill.textContent = state.lang === 'km' ? '✓ គ្រប់ 10+ កញ្ចប់' : '✓ 10+ Unlocked';
+      } else {
+        moqFill.className = 'h-full rounded-full bg-goldBurnished transition-all duration-300';
+        moqPill.className = 'px-2.5 py-0.5 rounded-full text-[11px] font-bold bg-cinnabar/10 text-cinnabar border border-cinnabar/30';
+        moqPill.textContent = state.lang === 'km'
+          ? 'ខ្វះ ' + totals.remainingMoq + ' កញ្ចប់ទៀត'
+          : 'Need ' + totals.remainingMoq + ' more';
+      }
+
+      // 4 Pack Tier Cards with 48px Touch Steppers
+      var cardsEl = document.getElementById('orderPackCardsList');
+      cardsEl.innerHTML = WHOLESALE_TIERS.map(function (tier) {
+        var qty = state.cart[tier.id] || 0;
+        var selected = qty > 0;
+        var title = state.lang === 'km' ? tier.weightKm : tier.weightEn;
+        var unitRate = state.lang === 'km' ? tier.unitRateKm : tier.unitRateEn;
+        var lineTotal = qty * tier.priceKHR;
+
+        return (
+          '<div class="' + (selected ? 'royal-card-selected' : 'royal-card') + ' rounded-2xl p-3.5 space-y-2.5 transition-all">' +
+            '<div class="flex items-start justify-between gap-2">' +
+              '<div>' +
+                '<div class="flex items-center gap-1.5 flex-wrap">' +
+                  '<span class="tabular-nums text-base font-bold text-inkCharcoal">' + escapeHTML(title) + '</span>' +
+                  (tier.bestValue
+                    ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-cinnabar text-goldBright border border-goldBright/60">★ Best Value / តម្លៃពិសេស</span>'
+                    : '') +
+                '</div>' +
+                '<div class="tabular-nums text-[11px] text-bronzeMuted">' + escapeHTML(unitRate) + '</div>' +
+              '</div>' +
+              '<div class="text-right flex-shrink-0">' +
+                '<div class="tabular-nums text-lg font-bold text-cinnabar leading-none">' + fmtPrimary(tier.priceKHR) + '</div>' +
+                '<div class="tabular-nums text-[11px] font-semibold text-bronzeMuted mt-0.5">' + fmtSecondary(tier.priceKHR) + '</div>' +
+              '</div>' +
+            '</div>' +
+
+            '<div class="pt-2 border-t border-goldHairline/70 flex items-center justify-between gap-2">' +
+              '<div class="inline-flex items-center bg-silkIvory border border-goldHairline rounded-xl p-0.5">' +
+                '<button type="button" onclick="changeQty(\'' + tier.id + '\', -1)" class="android-touch-square rounded-lg bg-cardSurface active:bg-parchment border border-goldHairline/80 text-inkCharcoal font-bold text-xl flex items-center justify-center" aria-label="Minus">−</button>' +
+                '<input type="number" min="0" max="999" value="' + qty + '" onchange="setDirectQty(\'' + tier.id + '\', this.value)" class="w-12 h-12 text-center tabular-nums font-bold text-base bg-transparent text-inkCharcoal focus:outline-none" aria-label="Pack Quantity"/>' +
+                '<button type="button" onclick="changeQty(\'' + tier.id + '\', 1)" class="android-touch-square rounded-lg bg-cinnabar active:bg-cinnabarDark text-silkIvory font-bold text-xl flex items-center justify-center" aria-label="Plus">+</button>' +
+              '</div>' +
+
+              '<div class="flex items-center gap-2">' +
+                '<button type="button" onclick="changeQty(\'' + tier.id + '\', 5)" class="android-touch-square px-3 rounded-xl bg-parchment active:bg-goldHairline/60 border border-goldHairline text-cinnabar font-num font-bold text-xs flex items-center justify-center">+5</button>' +
+                '<div class="text-right min-w-[66px]">' +
+                  '<div class="text-[10px] text-bronzeMuted">' + (state.lang === 'km' ? 'សរុប' : 'Total') + '</div>' +
+                  '<div class="tabular-nums text-xs font-bold ' + (qty > 0 ? 'text-jadeSeal' : 'text-bronzeMuted') + '">' + fmtPrimary(lineTotal) + '</div>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>'
+        );
+      }).join('');
+
+      // Sync Delivery & Cooling Pill Buttons on Order Screen
+      syncServiceToggleButtons('orderDelivPaidBtn', 'orderDelivFreeBtn', 'orderDelivSub', 'orderCoolPaidBtn', 'orderCoolFreeBtn', 'orderCoolSub');
+
+      // Update Floating Checkout Bar
+      document.getElementById('checkoutBarPacks').textContent = totals.totalPacks + (state.lang === 'km' ? ' កញ្ចប់' : ' packs');
+      document.getElementById('checkoutBarAddons').textContent = totals.totalPacks > 0
+        ? ('+' + fmtUSD(totals.serviceFeesKHR) + (state.lang === 'km' ? ' សេវា' : ' add-ons'))
+        : (state.lang === 'km' ? 'ជ្រើសរើសកញ្ចប់' : 'Select packs');
+      document.getElementById('checkoutBarGrandPrimary').textContent = fmtPrimary(totals.grandTotalKHR);
+      document.getElementById('checkoutBarGrandSecondary').textContent = fmtSecondary(totals.grandTotalKHR);
+    }
+
+    function syncServiceToggleButtons(dPaidId, dFreeId, dSubId, cPaidId, cFreeId, cSubId) {
+      var dPaid = document.getElementById(dPaidId);
+      var dFree = document.getElementById(dFreeId);
+      var dSub = document.getElementById(dSubId);
+
+      if (state.deliveryOption === 'paid') {
+        dPaid.className = 'android-touch px-3 rounded-lg text-xs font-num font-bold transition-all bg-cinnabar text-goldBright';
+        dFree.className = 'android-touch px-3 rounded-lg text-xs font-bold transition-all text-bronzeMuted';
+        dSub.textContent = '$2.00 (8,000៛)';
+      } else {
+        dFree.className = 'android-touch px-3 rounded-lg text-xs font-bold transition-all bg-jadeSeal text-white';
+        dPaid.className = 'android-touch px-3 rounded-lg text-xs font-num font-bold transition-all text-bronzeMuted';
+        dSub.textContent = state.lang === 'km' ? 'Free (ឥតគិតថ្លៃ • 0៛)' : 'Free ($0.00 • 0៛)';
+      }
+
+      var cPaid = document.getElementById(cPaidId);
+      var cFree = document.getElementById(cFreeId);
+      var cSub = document.getElementById(cSubId);
+
+      if (state.coolingOption === 'paid') {
+        cPaid.className = 'android-touch px-3 rounded-lg text-xs font-num font-bold transition-all bg-cinnabar text-goldBright';
+        cFree.className = 'android-touch px-3 rounded-lg text-xs font-bold transition-all text-bronzeMuted';
+        cSub.textContent = '$1.25 (5,000៛)';
+      } else {
+        cFree.className = 'android-touch px-3 rounded-lg text-xs font-bold transition-all bg-jadeSeal text-white';
+        cPaid.className = 'android-touch px-3 rounded-lg text-xs font-num font-bold transition-all text-bronzeMuted';
+        cSub.textContent = state.lang === 'km' ? 'Free (ឥតគិតថ្លៃ • 0៛)' : 'Free ($0.00 • 0៛)';
+      }
+    }
+
+    // -----------------------------------------------------------------------
+    // 8. TAB 2 RENDER: RECEIPT SCREEN
+    // -----------------------------------------------------------------------
+    function renderReceiptScreen(totals) {
+      // Populate customer inputs if not actively focused
+      var nameIn = document.getElementById('custNameInput');
+      var phoneIn = document.getElementById('custPhoneInput');
+      var addrIn = document.getElementById('custAddressInput');
+      var noteIn = document.getElementById('custNoteInput');
+
+      if (document.activeElement !== nameIn) nameIn.value = state.customer.name || '';
+      if (document.activeElement !== phoneIn) phoneIn.value = state.customer.phone || '';
+      if (document.activeElement !== addrIn) addrIn.value = state.customer.address || '';
+      if (document.activeElement !== noteIn) noteIn.value = state.customer.note || '';
+
+      syncServiceToggleButtons('recDelivPaidBtn', 'recDelivFreeBtn', 'recDelivSub', 'recCoolPaidBtn', 'recCoolFreeBtn', 'recCoolSub');
+
+      var now = new Date();
+      var dateStr = now.toLocaleDateString('en-GB') + ' ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      var orderId = '#SC-' + String(1001 + state.history.length);
+
+      document.getElementById('receiptInvoiceNum').textContent = orderId;
+      document.getElementById('receiptDateText').textContent = dateStr;
+
+      var cName = state.customer.name.trim() || (state.lang === 'km' ? 'អតិថិជនបោះដុំ' : 'Wholesale Customer');
+      var cPhone = state.customer.phone.trim() || '—';
+      var cAddr = state.customer.address.trim() || '—';
+      var cNote = state.customer.note.trim();
+
+      var custHtml =
+        '<div class="flex justify-between gap-2"><span class="text-bronzeMuted">' + (state.lang === 'km' ? 'អតិថិជន / ហាង៖' : 'Customer:') + '</span><span class="font-bold text-inkCharcoal text-right">' + escapeHTML(cName) + '</span></div>' +
+        '<div class="flex justify-between gap-2"><span class="text-bronzeMuted">' + (state.lang === 'km' ? 'លេខទូរស័ព្ទ៖' : 'Phone:') + '</span><span class="tabular-nums font-bold text-inkCharcoal">' + escapeHTML(cPhone) + '</span></div>' +
+        '<div class="flex justify-between gap-2"><span class="text-bronzeMuted">' + (state.lang === 'km' ? 'ទីតាំងដឹកជញ្ជូន៖' : 'Address:') + '</span><span class="font-semibold text-inkCharcoal text-right">' + escapeHTML(cAddr) + '</span></div>';
+
+      if (cNote) {
+        custHtml += '<div class="flex justify-between gap-2"><span class="text-bronzeMuted">' + (state.lang === 'km' ? 'ចំណាំ៖' : 'Note:') + '</span><span class="font-semibold text-cinnabar text-right">' + escapeHTML(cNote) + '</span></div>';
+      }
+      document.getElementById('receiptCustBox').innerHTML = custHtml;
+
+      var listEl = document.getElementById('receiptItemsList');
+      if (totals.items.length === 0) {
+        listEl.innerHTML =
+          '<div class="py-5 px-3 text-center text-bronzeMuted italic">' +
+            (state.lang === 'km' ? 'មិនទាន់មានកញ្ចប់ត្រូវបានជ្រើសរើសនៅឡើយទេ' : 'No packs selected yet') +
+          '</div>';
+      } else {
+        listEl.innerHTML = totals.items.map(function (it) {
+          var wLabel = state.lang === 'km' ? it.weightKm : it.weightEn;
+          return (
+            '<div class="grid grid-cols-12 items-center px-3 py-2">' +
+              '<div class="col-span-5 font-bold text-inkCharcoal">' + escapeHTML(wLabel) + '</div>' +
+              '<div class="col-span-3 text-center tabular-nums font-bold text-cinnabar">× ' + it.qty + '</div>' +
+              '<div class="col-span-4 text-right tabular-nums font-bold text-inkCharcoal">' + fmtKHR(it.lineKHR) + '</div>' +
+            '</div>'
+          );
+        }).join('');
+      }
+
+      document.getElementById('recGoodsSubText').textContent = fmtKHR(totals.goodsSubtotalKHR) + ' (' + fmtUSD(totals.goodsSubtotalKHR) + ')';
+
+      var delivLine = document.getElementById('recDelivLineText');
+      if (totals.deliveryOption === 'free') {
+        delivLine.className = 'tabular-nums font-bold text-jadeSeal';
+        delivLine.textContent = state.lang === 'km' ? 'Free (ឥតគិតថ្លៃ • 0៛)' : 'Free ($0.00 • 0៛)';
+      } else {
+        delivLine.className = 'tabular-nums font-bold text-inkCharcoal';
+        delivLine.textContent = '$2.00 (8,000៛)';
+      }
+
+      var coolLine = document.getElementById('recCoolLineText');
+      if (totals.coolingOption === 'free') {
+        coolLine.className = 'tabular-nums font-bold text-jadeSeal';
+        coolLine.textContent = state.lang === 'km' ? 'Free (ឥតគិតថ្លៃ • 0៛)' : 'Free ($0.00 • 0៛)';
+      } else {
+        coolLine.className = 'tabular-nums font-bold text-inkCharcoal';
+        coolLine.textContent = '$1.25 (5,000៛)';
+      }
+
+      document.getElementById('recWeightBadge').textContent = totals.totalPacks + (state.lang === 'km' ? ' កញ្ចប់ • ' : ' packs • ') + (totals.totalGrams / 1000).toFixed(2) + ' kg';
+      document.getElementById('recGrandKHR').textContent = fmtKHR(totals.grandTotalKHR);
+      document.getElementById('recGrandUSD').textContent = fmtUSD(totals.grandTotalKHR) + ' USD';
+    }
+
+    function syncCustomerFields() {
+      state.customer.name = document.getElementById('custNameInput').value;
+      state.customer.phone = document.getElementById('custPhoneInput').value;
+      state.customer.address = document.getElementById('custAddressInput').value;
+      state.customer.note = document.getElementById('custNoteInput').value;
+      saveAppState();
+      renderReceiptScreen(computeOrderTotals());
+    }
+
+    // -----------------------------------------------------------------------
+    // 9. HIGH-RESOLUTION 900PX (2X RETINA = 1800PX) PNG RECEIPT GENERATOR
+    //    Uses cross-browser arcTo() helper (NEVER ctx.roundRect)
+    // -----------------------------------------------------------------------
+    function drawRoundRect(ctx, x, y, w, h, r) {
+      var radius = Math.max(0, Math.min(r, w / 2, h / 2));
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.arcTo(x + w, y, x + w, y + h, radius);
+      ctx.arcTo(x + w, y + h, x, y + h, radius);
+      ctx.arcTo(x, y + h, x, y, radius);
+      ctx.arcTo(x, y, x + w, y, radius);
+      ctx.closePath();
+    }
+
+    function wrapCanvasText(ctx, text, maxWidth) {
+      var words = String(text || '—').split(/\s+/);
+      var lines = [];
+      var current = '';
+      for (var i = 0; i < words.length; i++) {
+        var word = words[i];
+        var candidate = current ? (current + ' ' + word) : word;
+        if (ctx.measureText(candidate).width <= maxWidth) {
+          current = candidate;
+        } else {
+          if (current) lines.push(current);
+          current = word;
+        }
+      }
+      if (current) lines.push(current);
+      return lines.length > 0 ? lines : ['—'];
+    }
+
+    function renderReceiptCanvasDataUrl(receipt) {
+      var W = 900;
+      var scale = 2; // 2x Retina = 1800px crisp output
+      var pad = 44;
+      var innerW = W - pad * 2;
+
+      var measureCanvas = document.createElement('canvas');
+      var mCtx = measureCanvas.getContext('2d');
+      mCtx.font = '600 20px "Kantumruy Pro", "Plus Jakarta Sans", sans-serif';
+      var addrLines = wrapCanvasText(mCtx, receipt.customerAddress || '—', 510);
+      var hasNote = Boolean(receipt.customerNote && receipt.customerNote.trim());
+      var noteLines = hasNote ? wrapCanvasText(mCtx, receipt.customerNote.trim(), 510) : [];
+
+      var headerH = 264;
+      var metaH = 66;
+      var custBoxH = 122 + (addrLines.length - 1) * 28 + (hasNote ? (36 + (noteLines.length - 1) * 28) : 0);
+      var itemRowH = 56;
+      var itemsBoxH = 52 + Math.max(1, receipt.items.length) * itemRowH;
+      var totalsBoxH = 296;
+      var footerH = 112;
+
+      var H = 36 + headerH + 18 + metaH + 18 + custBoxH + 18 + itemsBoxH + 18 + totalsBoxH + 22 + footerH + 36;
+
+      var canvas = document.createElement('canvas');
+      canvas.width = W * scale;
+      canvas.height = H * scale;
+      var ctx = canvas.getContext('2d');
+      ctx.scale(scale, scale);
+
+      // 1. Warm Silk Ivory Parchment Base (#FAF6EE)
+      ctx.fillStyle = '#FAF6EE';
+      ctx.fillRect(0, 0, W, H);
+
+      // Subtle Gold Silk Lattice Dots
+      ctx.fillStyle = 'rgba(184, 137, 58, 0.08)';
+      for (var gx = 36; gx < W - 24; gx += 32) {
+        for (var gy = 36; gy < H - 24; gy += 32) {
+          ctx.beginPath();
+          ctx.arc(gx, gy, 1.2, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      // 2. Burnished Imperial Gold Double Royal Frame
+      ctx.strokeStyle = '#B8893A';
+      ctx.lineWidth = 3;
+      ctx.strokeRect(18, 18, W - 36, H - 36);
+
+      ctx.strokeStyle = '#D4AF37';
+      ctx.lineWidth = 1.25;
+      ctx.strokeRect(28, 28, W - 56, H - 56);
+
+      // Chinese Royal Corner Key-Pattern Fretwork (回纹)
+      ctx.strokeStyle = '#B8893A';
+      ctx.lineWidth = 2;
+      var drawCornerFret = function (cx, cy, dx, dy) {
+        ctx.beginPath();
+        ctx.moveTo(cx, cy + 32 * dy);
+        ctx.lineTo(cx, cy);
+        ctx.lineTo(cx + 32 * dx, cy);
+        ctx.moveTo(cx + 9 * dx, cy + 23 * dy);
+        ctx.lineTo(cx + 9 * dx, cy + 9 * dy);
+        ctx.lineTo(cx + 23 * dx, cy + 9 * dy);
+        ctx.stroke();
+      };
+      drawCornerFret(34, 34, 1, 1);
+      drawCornerFret(W - 34, 34, -1, 1);
+      drawCornerFret(34, H - 34, 1, -1);
+      drawCornerFret(W - 34, H - 34, -1, -1);
+
+      var y = 44;
+
+      // 3. Official Street Chicken Brand Header Plaque
+      drawRoundRect(ctx, pad, y, innerW, headerH, 18);
+      ctx.fillStyle = '#F3ECE0';
+      ctx.fill();
+
+      ctx.strokeStyle = '#7A1318';
+      ctx.lineWidth = 2.5;
+      drawRoundRect(ctx, pad, y, innerW, headerH, 18);
+      ctx.stroke();
+
+      ctx.strokeStyle = '#B8893A';
+      ctx.lineWidth = 1.2;
+      drawRoundRect(ctx, pad + 7, y + 7, innerW - 14, headerH - 14, 13);
+      ctx.stroke();
+
+      drawStreetChickenEmblemOnCanvas(ctx, W / 2, y + 72, 54);
+
+      // Bold Crimson & Dark Brown Outlined "Street Chicken"
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.font = '700 40px "Cinzel", Georgia, serif';
+      ctx.lineWidth = 5;
+      ctx.strokeStyle = '#4A180D';
+      ctx.strokeText('Street Chicken', W / 2, y + 150);
+      ctx.fillStyle = '#A81C13';
+      ctx.fillText('Street Chicken', W / 2, y + 150);
+
+      // Matching Khmer Subtitle "បោះដុំជ្រក់ជើងមាន់បែបចិន"
+      ctx.font = '700 24px "Kantumruy Pro", sans-serif';
+      ctx.lineWidth = 3.2;
+      ctx.strokeStyle = '#4A180D';
+      ctx.strokeText('បោះដុំជ្រក់ជើងមាន់បែបចិន', W / 2, y + 190);
+      ctx.fillStyle = '#A81C13';
+      ctx.fillText('បោះដុំជ្រក់ជើងមាន់បែបចិន', W / 2, y + 190);
+
+      // Wholesale Headline Ribbon
+      drawRoundRect(ctx, (W - 450) / 2, y + 216, 450, 32, 16);
+      ctx.fillStyle = '#7A1318';
+      ctx.fill();
+      ctx.strokeStyle = '#D4AF37';
+      ctx.lineWidth = 1.2;
+      ctx.stroke();
+
+      ctx.fillStyle = '#FAF6EE';
+      ctx.font = '700 16px "Kantumruy Pro", sans-serif';
+      ctx.fillText('តារាងតម្លៃបោះដុំ (យកចាប់ពី 10កញ្ចប់)', W / 2, y + 233);
+
+      y += headerH + 18;
+
+      // 4. Receipt #ID & Date Bar
+      drawRoundRect(ctx, pad, y, innerW, metaH, 14);
+      ctx.fillStyle = '#F3ECE0';
+      ctx.fill();
+      ctx.strokeStyle = '#E6D2A8';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      drawRoundRect(ctx, pad + 16, y + 13, 168, 40, 10);
+      ctx.fillStyle = '#7A1318';
+      ctx.fill();
+      ctx.fillStyle = '#D4AF37';
+      ctx.font = '700 21px "Plus Jakarta Sans", sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(receipt.orderId, pad + 16 + 84, y + 34);
+
+      if (receipt.totalPacks >= MOQ_MIN_PACKS) {
+        drawRoundRect(ctx, pad + 196, y + 15, 214, 36, 18);
+        ctx.fillStyle = 'rgba(30, 107, 82, 0.14)';
+        ctx.fill();
+        ctx.strokeStyle = '#1E6B52';
+        ctx.lineWidth = 1.2;
+        ctx.stroke();
+        ctx.fillStyle = '#1E6B52';
+        ctx.font = '700 16px "Kantumruy Pro", sans-serif';
+        ctx.fillText('✓ គ្រប់ 10+ កញ្ចប់បោះដុំ', pad + 196 + 107, y + 34);
+      }
+
+      ctx.fillStyle = '#6B5E53';
+      ctx.font = '600 19px "Plus Jakarta Sans", sans-serif';
+      ctx.textAlign = 'right';
+      ctx.fillText(receipt.timestamp, pad + innerW - 20, y + 34);
+
+      y += metaH + 18;
+
+      // 5. Customer Information Card
+      drawRoundRect(ctx, pad, y, innerW, custBoxH, 16);
+      ctx.fillStyle = '#FFFDF9';
+      ctx.fill();
+      ctx.strokeStyle = '#E6D2A8';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      var lx = pad + 22;
+      var rx = pad + innerW - 22;
+      var cy = y + 32;
+
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#6B5E53';
+      ctx.font = '600 20px "Kantumruy Pro", sans-serif';
+      ctx.fillText('អតិថិជន / ហាង (Customer):', lx, cy);
+      ctx.textAlign = 'right';
+      ctx.fillStyle = '#231815';
+      ctx.font = '700 22px "Kantumruy Pro", sans-serif';
+      ctx.fillText(receipt.customerName || 'អតិថិជនបោះដុំ', rx, cy);
+
+      cy += 38;
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#6B5E53';
+      ctx.font = '600 20px "Kantumruy Pro", sans-serif';
+      ctx.fillText('លេខទូរស័ព្ទ (Phone):', lx, cy);
+      ctx.textAlign = 'right';
+      ctx.fillStyle = '#231815';
+      ctx.font = '700 22px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(receipt.customerPhone || '—', rx, cy);
+
+      cy += 38;
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#6B5E53';
+      ctx.font = '600 20px "Kantumruy Pro", sans-serif';
+      ctx.fillText('ទីតាំងដឹកជញ្ជូន (Address):', lx, cy);
+      ctx.textAlign = 'right';
+      ctx.fillStyle = '#231815';
+      ctx.font = '600 20px "Kantumruy Pro", sans-serif';
+      addrLines.forEach(function (line, idx) {
+        ctx.fillText(line, rx, cy + idx * 28);
+      });
+
+      if (hasNote) {
+        cy += addrLines.length * 28 + 10;
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#6B5E53';
+        ctx.font = '600 19px "Kantumruy Pro", sans-serif';
+        ctx.fillText('ចំណាំ (Note):', lx, cy);
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#7A1318';
+        ctx.font = '600 19px "Kantumruy Pro", sans-serif';
+        noteLines.forEach(function (line, idx) {
+          ctx.fillText(line, rx, cy + idx * 28);
+        });
+      }
+
+      y += custBoxH + 18;
+
+      // 6. Itemized Table
+      drawRoundRect(ctx, pad, y, innerW, itemsBoxH, 16);
+      ctx.fillStyle = '#FFFDF9';
+      ctx.fill();
+      ctx.strokeStyle = '#E6D2A8';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      drawRoundRect(ctx, pad, y, innerW, 52, 16);
+      ctx.fillStyle = '#F3ECE0';
+      ctx.fill();
+      ctx.fillRect(pad, y + 34, innerW, 18);
+
+      ctx.strokeStyle = '#E6D2A8';
+      ctx.beginPath();
+      ctx.moveTo(pad, y + 52);
+      ctx.lineTo(pad + innerW, y + 52);
+      ctx.stroke();
+
+      var c1 = pad + 22;
+      var c2 = pad + 420;
+      var c3 = pad + 590;
+      var c4 = pad + innerW - 22;
+
+      ctx.fillStyle = '#6B5E53';
+      ctx.font = '700 18px "Kantumruy Pro", sans-serif';
+      ctx.textAlign = 'left';
+      ctx.fillText('ខ្នាតកញ្ចប់ (Pack Size)', c1, y + 27);
+      ctx.textAlign = 'center';
+      ctx.fillText('ចំនួន (Qty)', c2, y + 27);
+      ctx.textAlign = 'right';
+      ctx.fillText('តម្លៃរាយ', c3, y + 27);
+      ctx.fillText('សរុប (Amount)', c4, y + 27);
+
+      var rowTop = y + 52;
+      receipt.items.forEach(function (it, idx) {
+        if (idx > 0) {
+          ctx.strokeStyle = 'rgba(230, 210, 168, 0.75)';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(pad + 16, rowTop);
+          ctx.lineTo(pad + innerW - 16, rowTop);
+          ctx.stroke();
+        }
+        var mid = rowTop + itemRowH / 2 + 1;
+        ctx.textAlign = 'left';
+        ctx.fillStyle = '#231815';
+        ctx.font = '700 22px "Kantumruy Pro", sans-serif';
+        ctx.fillText(it.weightKm, c1, mid);
+
+        ctx.textAlign = 'center';
+        ctx.fillStyle = '#7A1318';
+        ctx.font = '700 22px "Plus Jakarta Sans", sans-serif';
+        ctx.fillText('× ' + it.qty, c2, mid);
+
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#6B5E53';
+        ctx.font = '600 20px "Plus Jakarta Sans", sans-serif';
+        ctx.fillText(fmtKHR(it.priceKHR), c3, mid);
+
+        ctx.fillStyle = '#231815';
+        ctx.font = '700 23px "Plus Jakarta Sans", sans-serif';
+        ctx.fillText(fmtKHR(it.lineKHR), c4, mid);
+
+        rowTop += itemRowH;
+      });
+
+      y += itemsBoxH + 18;
+
+      // 7. Totals Breakdown (Goods Subtotal + Delivery + Cooling + Grand Total)
+      drawRoundRect(ctx, pad, y, innerW, totalsBoxH, 18);
+      ctx.fillStyle = '#FFFDF9';
+      ctx.fill();
+      ctx.strokeStyle = '#B8893A';
+      ctx.lineWidth = 1.8;
+      ctx.stroke();
+
+      var ty = y + 34;
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#6B5E53';
+      ctx.font = '600 20px "Kantumruy Pro", sans-serif';
+      ctx.fillText('សរុបថ្លៃទំនិញ (' + receipt.totalPacks + ' កញ្ចប់ • ' + (receipt.totalGrams / 1000).toFixed(2) + 'kg):', lx, ty);
+
+      ctx.textAlign = 'right';
+      ctx.fillStyle = '#231815';
+      ctx.font = '700 22px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(fmtKHR(receipt.goodsSubtotalKHR) + ' (' + fmtUSD(receipt.goodsSubtotalKHR) + ')', rx, ty);
+
+      // Delivery Service Line
+      ty += 42;
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#6B5E53';
+      ctx.font = '600 20px "Kantumruy Pro", sans-serif';
+      ctx.fillText('សេវាដឹកជញ្ជូន (Delivery Service):', lx, ty);
+
+      ctx.textAlign = 'right';
+      if (receipt.deliveryKHR === 0) {
+        ctx.fillStyle = '#1E6B52';
+        ctx.font = '700 21px "Kantumruy Pro", sans-serif';
+        ctx.fillText('Free (ឥតគិតថ្លៃ • 0៛)', rx, ty);
+      } else {
+        ctx.fillStyle = '#231815';
+        ctx.font = '700 21px "Plus Jakarta Sans", sans-serif';
+        ctx.fillText('$2.00 (8,000៛)', rx, ty);
+      }
+
+      // Cooling Pack Line
+      ty += 42;
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#6B5E53';
+      ctx.font = '600 20px "Kantumruy Pro", sans-serif';
+      ctx.fillText('កញ្ចប់រក្សាភាពត្រជាក់ (Cooling Pack):', lx, ty);
+
+      ctx.textAlign = 'right';
+      if (receipt.coolingKHR === 0) {
+        ctx.fillStyle = '#1E6B52';
+        ctx.font = '700 21px "Kantumruy Pro", sans-serif';
+        ctx.fillText('Free (ឥតគិតថ្លៃ • 0៛)', rx, ty);
+      } else {
+        ctx.fillStyle = '#231815';
+        ctx.font = '700 21px "Plus Jakarta Sans", sans-serif';
+        ctx.fillText('$1.25 (5,000៛)', rx, ty);
+      }
+
+      // Grand Total Cinnabar Highlight Strip
+      var gBoxY = y + 156;
+      var gBoxH = 120;
+      drawRoundRect(ctx, pad + 16, gBoxY, innerW - 32, gBoxH, 14);
+      ctx.fillStyle = '#7A1318';
+      ctx.fill();
+      ctx.strokeStyle = '#D4AF37';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      ctx.textAlign = 'left';
+      ctx.fillStyle = '#E6D2A8';
+      ctx.font = '700 23px "Kantumruy Pro", sans-serif';
+      ctx.fillText('សរុបទឹកប្រាក់ត្រូវទូទាត់', pad + 36, gBoxY + 42);
+      ctx.fillStyle = '#D4AF37';
+      ctx.font = '700 17px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('GRAND TOTAL PAYABLE', pad + 36, gBoxY + 78);
+
+      ctx.textAlign = 'right';
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = '700 40px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(fmtKHR(receipt.grandTotalKHR), pad + innerW - 36, gBoxY + 44);
+
+      ctx.fillStyle = '#D4AF37';
+      ctx.font = '700 23px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(fmtUSD(receipt.grandTotalKHR) + ' USD', pad + innerW - 36, gBoxY + 84);
+
+      y += totalsBoxH + 22;
+
+      // 8. Guarantee & Royal Seal Stamp Footer Plaque
+      drawRoundRect(ctx, pad, y, innerW, footerH, 16);
+      ctx.fillStyle = '#F3ECE0';
+      ctx.fill();
+      ctx.strokeStyle = '#D4AF37';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      // Square Imperial Red Seal Stamp
+      var stampX = pad + innerW - 102;
+      var stampY = y + 16;
+      drawRoundRect(ctx, stampX, stampY, 80, 80, 10);
+      ctx.fillStyle = '#7A1318';
+      ctx.fill();
+      ctx.strokeStyle = '#D4AF37';
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#D4AF37';
+      ctx.font = '700 16px "Kantumruy Pro", sans-serif';
+      ctx.fillText('御製秘方', stampX + 40, stampY + 26);
+      ctx.fillStyle = '#FAF6EE';
+      ctx.font = '700 13px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('VERIFIED', stampX + 40, stampY + 46);
+      ctx.fillStyle = '#E6D2A8';
+      ctx.font = '700 11px "Kantumruy Pro", sans-serif';
+      ctx.fillText('បោះដុំពិត', stampX + 40, stampY + 65);
+
+      var textCenterX = pad + (innerW - 110) / 2;
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#7A1318';
+      ctx.font = '700 22px "Kantumruy Pro", sans-serif';
+      ctx.fillText('ធានារសជាតិដើមបែបចិន ស្រួយ ឆ្ងាញ់ មិនហិលខ្លាំង', textCenterX, y + 42);
+
+      ctx.fillStyle = '#6B5E53';
+      ctx.font = '600 16.5px "Plus Jakarta Sans", "Kantumruy Pro", sans-serif';
+      ctx.fillText('1 USD = 4,000 KHR • សូមអរគុណសម្រាប់ការគាំទ្រ Street Chicken', textCenterX, y + 78);
+
+      return canvas.toDataURL('image/png');
+    }
+
+    function generateAndOpenReceiptSheet(receiptPayload) {
+      var fontsReady = (document.fonts && document.fonts.ready)
+        ? document.fonts.ready
+        : Promise.resolve();
+
+      fontsReady.then(function () {
+        try {
+          var dataUrl = renderReceiptCanvasDataUrl(receiptPayload);
+          var cleanId = String(receiptPayload.orderId || 'SC').replace(/[^a-zA-Z0-9-]/g, '');
+          currentReceiptPngDataUrl = dataUrl;
+          currentReceiptFilename = 'StreetChicken-Receipt-' + cleanId + '.png';
+
+          var imgEl = document.getElementById('receiptPhotoImg');
+          var dlLink = document.getElementById('downloadReceiptPngLink');
+          imgEl.src = dataUrl;
+          dlLink.href = dataUrl;
+          dlLink.download = currentReceiptFilename;
+
+          document.getElementById('receiptPhotoSheet').classList.remove('hidden');
+          showToast(t('toastPhotoReady'));
+        } catch (err) {
+          console.error('Receipt PNG generation error:', err);
+        }
+      });
+    }
+
+    function openReceiptPhotoSheetFromCurrent() {
+      var totals = computeOrderTotals();
+      if (totals.totalPacks === 0) {
+        showToast(t('toastNeed1Pack'));
+        return;
+      }
+
+      var now = new Date();
+      generateAndOpenReceiptSheet({
+        orderId: document.getElementById('receiptInvoiceNum').textContent || '#SC-1001',
+        timestamp: now.toLocaleDateString('en-GB') + ' ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        customerName: state.customer.name.trim() || (state.lang === 'km' ? 'អតិថិជនបោះដុំ' : 'Wholesale Customer'),
+        customerPhone: state.customer.phone.trim() || '—',
+        customerAddress: state.customer.address.trim() || '—',
+        customerNote: state.customer.note.trim() || '',
+        items: totals.items,
+        totalPacks: totals.totalPacks,
+        totalGrams: totals.totalGrams,
+        goodsSubtotalKHR: totals.goodsSubtotalKHR,
+        deliveryKHR: totals.deliveryKHR,
+        coolingKHR: totals.coolingKHR,
+        grandTotalKHR: totals.grandTotalKHR
+      });
+    }
+
+    function openReceiptPhotoSheetFromHistory(orderId) {
+      var found = state.history.find(function (ord) { return ord.orderId === orderId; });
+      if (!found) return;
+
+      var goodsSub = typeof found.goodsSubtotalKHR === 'number'
+        ? found.goodsSubtotalKHR
+        : found.items.reduce(function (s, it) { return s + it.lineKHR; }, 0);
+      var delivFee = typeof found.deliveryKHR === 'number' ? found.deliveryKHR : 0;
+      var coolFee = typeof found.coolingKHR === 'number' ? found.coolingKHR : 0;
+
+      generateAndOpenReceiptSheet({
+        orderId: found.orderId,
+        timestamp: found.timestamp,
+        customerName: found.customerName,
+        customerPhone: found.customerPhone,
+        customerAddress: found.customerAddress,
+        customerNote: found.customerNote || '',
+        items: found.items,
+        totalPacks: found.totalPacks,
+        totalGrams: found.totalGrams,
+        goodsSubtotalKHR: goodsSub,
+        deliveryKHR: delivFee,
+        coolingKHR: coolFee,
+        grandTotalKHR: found.grandTotalKHR
+      });
+    }
+
+    function dataUrlToBlob(dataUrl) {
+      var parts = dataUrl.split(',');
+      var mimeMatch = parts[0].match(/:(.*?);/);
+      var mime = mimeMatch ? mimeMatch[1] : 'image/png';
+      var binary = atob(parts[1]);
+      var len = binary.length;
+      var bytes = new Uint8Array(len);
+      for (var i = 0; i < len; i++) {
+        bytes[i] = binary.charCodeAt(i);
+      }
+      return new Blob([bytes], { type: mime });
+    }
+
+    function shareReceiptPhotoAndroid() {
+      if (!currentReceiptPngDataUrl) return;
+      try {
+        var blob = dataUrlToBlob(currentReceiptPngDataUrl);
+        var pngFile = new File([blob], currentReceiptFilename, { type: 'image/png' });
+        if (navigator.canShare && navigator.canShare({ files: [pngFile] })) {
+          navigator.share({
+            files: [pngFile],
+            title: 'Street Chicken — បោះដុំជ្រក់ជើងមាន់បែបចិន'
+          }).catch(function () {
+            // User cancelled native Android share sheet
+          });
+          return;
+        }
+      } catch (err) {
+        // Fallback to direct download below
+      }
+      var dlLink = document.getElementById('downloadReceiptPngLink');
+      if (dlLink) dlLink.click();
+    }
+
+    function closeReceiptPhotoSheet() {
+      document.getElementById('receiptPhotoSheet').classList.add('hidden');
+    }
+
+    function saveCurrentOrderToHistory() {
+      var totals = computeOrderTotals();
+      if (totals.totalPacks === 0) {
+        showToast(t('toastNeed1Pack'));
+        return;
+      }
+
+      var now = new Date();
+      var record = {
+        orderId: '#SC-' + String(1001 + state.history.length),
+        timestamp: now.toLocaleDateString('en-GB') + ' ' + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        customerName: state.customer.name.trim() || (state.lang === 'km' ? 'អតិថិជនបោះដុំ' : 'Wholesale Customer'),
+        customerPhone: state.customer.phone.trim() || '—',
+        customerAddress: state.customer.address.trim() || '—',
+        customerNote: state.customer.note.trim() || '',
+        cartSnapshot: Object.assign({}, state.cart),
+        deliveryOption: state.deliveryOption,
+        coolingOption: state.coolingOption,
+        items: totals.items,
+        totalPacks: totals.totalPacks,
+        totalGrams: totals.totalGrams,
+        goodsSubtotalKHR: totals.goodsSubtotalKHR,
+        deliveryKHR: totals.deliveryKHR,
+        coolingKHR: totals.coolingKHR,
+        grandTotalKHR: totals.grandTotalKHR
+      };
+
+      state.history.unshift(record);
+      saveAppState();
+      renderAll();
+      showToast(t('toastSavedHistory'));
+    }
+
+    // -----------------------------------------------------------------------
+    // 10. TAB 3 RENDER: PROFIT CALCULATOR
+    // -----------------------------------------------------------------------
+    function applyRetailPreset(presetKey) {
+      state.retailPreset = presetKey;
+      WHOLESALE_TIERS.forEach(function (tier) {
+        state.retailPrices[tier.id] = tier.retailPresets[presetKey];
+      });
+      saveAppState();
+      renderProfitScreen(computeOrderTotals());
+    }
+
+    function updateRetailPrice(tierId, rawVal) {
+      var val = parseInt(rawVal, 10);
+      state.retailPrices[tierId] = isNaN(val) || val < 0 ? 0 : val;
+      saveAppState();
+      renderProfitScreen(computeOrderTotals());
+    }
+
+    function loadSample20IntoCart() {
+      state.cart = { tier_105g: 8, tier_250g: 6, tier_500g: 4, tier_1000g: 2 };
+      saveAppState();
+      renderAll();
+      showToast(t('toastBundleApplied'));
+    }
+
+    function renderProfitScreen(totals) {
+      var emptyBanner = document.getElementById('profitEmptyBanner');
+      if (totals.totalPacks === 0) emptyBanner.classList.remove('hidden');
+      else emptyBanner.classList.add('hidden');
+
+      var presetMap = {
+        stall: document.getElementById('presetStallBtn'),
+        minimart: document.getElementById('presetMinimartBtn'),
+        online: document.getElementById('presetOnlineBtn')
+      };
+
+      Object.keys(presetMap).forEach(function (k) {
+        var btn = presetMap[k];
+        if (!btn) return;
+        if (state.retailPreset === k) {
+          btn.className = 'android-touch px-2 py-1.5 rounded-xl border text-[11px] font-bold text-center leading-tight transition-all bg-cinnabar text-goldBright border-goldBright';
+        } else {
+          btn.className = 'android-touch px-2 py-1.5 rounded-xl border text-[11px] font-bold text-center leading-tight transition-all bg-parchment text-inkCharcoal border-goldHairline';
+        }
+      });
+
+      var totalProjectedRevKHR = 0;
+      WHOLESALE_TIERS.forEach(function (tier) {
+        var qty = state.cart[tier.id] || 0;
+        if (qty > 0) {
+          totalProjectedRevKHR += qty * (state.retailPrices[tier.id] || 0);
+        }
+      });
+
+      var totalCostBasisKHR = totals.totalPacks > 0 ? totals.grandTotalKHR : 0;
+      var netProfitKHR = totalProjectedRevKHR - totalCostBasisKHR;
+      var marginPct = totalProjectedRevKHR > 0 ? ((netProfitKHR / totalProjectedRevKHR) * 100).toFixed(1) : '0.0';
+      var sign = netProfitKHR >= 0 ? '+' : '';
+
+      document.getElementById('profitCostKHR').textContent = fmtPrimary(totalCostBasisKHR);
+      document.getElementById('profitCostUSD').textContent = fmtSecondary(totalCostBasisKHR);
+
+      document.getElementById('profitRevKHR').textContent = fmtPrimary(totalProjectedRevKHR);
+      document.getElementById('profitRevUSD').textContent = fmtSecondary(totalProjectedRevKHR);
+
+      document.getElementById('profitNetKHR').textContent = sign + fmtPrimary(netProfitKHR);
+      document.getElementById('profitNetUSD').textContent = sign + fmtSecondary(netProfitKHR);
+      document.getElementById('profitMarginBadge').textContent = 'Margin: ' + sign + marginPct + '% (' + totals.totalPacks + ' packs)';
+
+      var rowsContainer = document.getElementById('profitRowsContainer');
+      rowsContainer.innerHTML = WHOLESALE_TIERS.map(function (tier) {
+        var qty = state.cart[tier.id] || 0;
+        var label = state.lang === 'km' ? tier.weightKm : tier.weightEn;
+        var retailVal = state.retailPrices[tier.id] || 0;
+        var lineProfitKHR = qty * (retailVal - tier.priceKHR);
+
+        return (
+          '<div class="grid grid-cols-12 items-center gap-1.5 bg-silkIvory rounded-xl px-2.5 py-2 border border-goldHairline/80">' +
+            '<div class="col-span-4">' +
+              '<div class="text-xs font-bold text-inkCharcoal">' + escapeHTML(label) + '</div>' +
+              '<div class="tabular-nums text-[10.5px] text-bronzeMuted">' + fmtKHR(tier.priceKHR) + ' × ' + qty + '</div>' +
+            '</div>' +
+            '<div class="col-span-4 flex justify-end">' +
+              '<input type="number" min="0" step="500" value="' + retailVal + '" oninput="updateRetailPrice(\'' + tier.id + '\', this.value)" class="android-touch w-24 text-right tabular-nums font-bold text-xs bg-cardSurface border border-goldHairline rounded-lg px-2 text-inkCharcoal focus:outline-none focus:border-cinnabar"/>' +
+            '</div>' +
+            '<div class="col-span-4 text-right tabular-nums text-xs font-bold ' + (lineProfitKHR >= 0 ? 'text-jadeSeal' : 'text-cinnabar') + '">' +
+              (lineProfitKHR >= 0 ? '+' : '') + fmtKHR(lineProfitKHR) +
+            '</div>' +
+          '</div>'
+        );
+      }).join('');
+    }
+
+    // -----------------------------------------------------------------------
+    // 11. TAB 4 RENDER: HISTORY SCREEN
+    // -----------------------------------------------------------------------
+    function renderHistoryScreen() {
+      var totalRevKHR = state.history.reduce(function (acc, ord) {
+        return acc + (Number(ord.grandTotalKHR) || 0);
+      }, 0);
+
+      document.getElementById('historyTotalRevKHR').textContent = fmtPrimary(totalRevKHR);
+      document.getElementById('historyTotalRevUSD').textContent = fmtSecondary(totalRevKHR);
+      document.getElementById('historyCountPill').textContent = state.history.length + (state.lang === 'km' ? ' វិក្កយបត្រ' : ' Orders');
+
+      var listEl = document.getElementById('historyOrdersList');
+      if (state.history.length === 0) {
+        listEl.innerHTML =
+          '<div class="royal-card rounded-2xl p-8 text-center space-y-2.5">' +
+            '<div class="w-14 h-14 mx-auto">' + getStreetChickenMedallionSVG('w-full h-full') + '</div>' +
+            '<h4 class="text-sm font-bold text-inkCharcoal">' +
+              (state.lang === 'km' ? 'មិនទាន់មានប្រវត្តិវិក្កយបត្រនៅឡើយទេ' : 'No Saved Orders Yet') +
+            '</h4>' +
+            '<p class="text-xs text-bronzeMuted">' +
+              (state.lang === 'km'
+                ? 'សូមបង្កើតការបញ្ជាទិញនៅផ្ទាំង "កម្ម៉ង់" រួចចុច Save to History នៅផ្ទាំង "វិក្កយបត្រ"។'
+                : 'Add packs on the Order tab and tap Save to History on the Receipt tab.') +
+            '</p>' +
+          '</div>';
+        return;
+      }
+
+      listEl.innerHTML = state.history.map(function (ord) {
+        var delivPill = ord.deliveryOption === 'free'
+          ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-jadeSeal/15 text-jadeSeal border border-jadeSeal/30">Delivery: Free</span>'
+          : '<span class="px-2 py-0.5 rounded-full text-[10px] font-num font-bold bg-parchment text-inkCharcoal border border-goldHairline">Delivery: $2.00</span>';
+
+        var coolPill = ord.coolingOption === 'free'
+          ? '<span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-jadeSeal/15 text-jadeSeal border border-jadeSeal/30">Cooling: Free</span>'
+          : '<span class="px-2 py-0.5 rounded-full text-[10px] font-num font-bold bg-parchment text-inkCharcoal border border-goldHairline">Cooling: $1.25</span>';
+
+        return (
+          '<div class="royal-card rounded-2xl p-3.5 space-y-3">' +
+            '<div class="flex items-start justify-between gap-2 border-b border-goldHairline pb-2.5">' +
+              '<div class="min-w-0">' +
+                '<div class="flex items-center gap-1.5">' +
+                  '<span class="tabular-nums px-2 py-0.5 rounded bg-cinnabar text-goldBright text-[11px] font-bold">' + escapeHTML(ord.orderId) + '</span>' +
+                  '<span class="font-bold text-xs sm:text-sm text-inkCharcoal truncate">' + escapeHTML(ord.customerName) + '</span>' +
+                '</div>' +
+                '<div class="tabular-nums text-[11px] text-bronzeMuted mt-1">' +
+                  escapeHTML(ord.timestamp) + ' • ' + escapeHTML(ord.customerPhone) +
+                '</div>' +
+              '</div>' +
+              '<div class="text-right flex-shrink-0">' +
+                '<div class="tabular-nums text-sm font-bold text-cinnabar">' + fmtPrimary(ord.grandTotalKHR) + '</div>' +
+                '<div class="tabular-nums text-[10.5px] text-bronzeMuted">' + fmtSecondary(ord.grandTotalKHR) + '</div>' +
+              '</div>' +
+            '</div>' +
+
+            '<div class="text-xs text-inkCharcoal space-y-1">' +
+              '<div class="font-semibold text-bronzeMuted">' + ord.totalPacks + (state.lang === 'km' ? ' កញ្ចប់ (' : ' packs (') + (ord.totalGrams / 1000).toFixed(2) + ' kg):</div>' +
+              '<div class="font-medium">' + ord.items.map(function (i) { return escapeHTML(i.weightKm) + ' × ' + i.qty; }).join(' • ') + '</div>' +
+            '</div>' +
+
+            '<div class="flex flex-wrap items-center gap-1.5">' + delivPill + coolPill + '</div>' +
+
+            '<div class="pt-2 border-t border-goldHairline/70 grid grid-cols-3 gap-1.5">' +
+              '<button type="button" onclick="openReceiptPhotoSheetFromHistory(\'' + escapeHTML(ord.orderId) + '\')" class="android-touch px-2 rounded-xl bg-cinnabar text-goldBright border border-goldBright/60 font-bold text-[11px]">' +
+                (state.lang === 'km' ? 'រូបភាព' : 'Photo') +
+              '</button>' +
+              '<button type="button" onclick="loadOrderIntoCart(\'' + escapeHTML(ord.orderId) + '\')" class="android-touch px-2 rounded-xl bg-jadeSeal text-white font-bold text-[11px]">' +
+                (state.lang === 'km' ? 'កម្ម៉ង់ម្ដងទៀត' : 'Load Cart') +
+              '</button>' +
+              '<button type="button" onclick="promptDeleteHistoryOrder(\'' + escapeHTML(ord.orderId) + '\')" class="android-touch px-2 rounded-xl bg-cardSurface border border-cinnabar/35 text-cinnabar font-bold text-[11px]">' +
+                (state.lang === 'km' ? 'លុប' : 'Delete') +
+              '</button>' +
+            '</div>' +
+          '</div>'
+        );
+      }).join('');
+    }
+
+    function loadOrderIntoCart(orderId) {
+      var found = state.history.find(function (ord) { return ord.orderId === orderId; });
+      if (!found) return;
+      state.cart = Object.assign({}, getDefaultState().cart, found.cartSnapshot || {});
+      state.deliveryOption = found.deliveryOption === 'free' ? 'free' : 'paid';
+      state.coolingOption = found.coolingOption === 'free' ? 'free' : 'paid';
+      state.customer = {
+        name: found.customerName !== 'អតិថិជនបោះដុំ' && found.customerName !== 'Wholesale Customer' ? found.customerName : '',
+        phone: found.customerPhone !== '—' ? found.customerPhone : '',
+        address: found.customerAddress !== '—' ? found.customerAddress : '',
+        note: found.customerNote || ''
+      };
+      state.activeTab = 'order';
+      saveAppState();
+      renderAll();
+      document.getElementById('androidScrollArea').scrollTop = 0;
+      showToast(t('toastOrderLoaded'));
+    }
+
+    function promptDeleteHistoryOrder(orderId) {
+      pendingDeleteOrderId = orderId;
+      document.getElementById('deleteConfirmSheet').classList.remove('hidden');
+    }
+
+    function closeDeleteConfirmSheet() {
+      pendingDeleteOrderId = null;
+      document.getElementById('deleteConfirmSheet').classList.add('hidden');
+    }
+
+    document.getElementById('confirmDeleteSheetBtn').addEventListener('click', function () {
+      if (pendingDeleteOrderId) {
+        state.history = state.history.filter(function (ord) { return ord.orderId !== pendingDeleteOrderId; });
+        saveAppState();
+        renderAll();
+        showToast(t('toastOrderDeleted'));
+      }
+      closeDeleteConfirmSheet();
+    });
+
+    // -----------------------------------------------------------------------
+    // 12. NAVIGATION, LANGUAGE/CURRENCY, DESKTOP SHELL & TOAST HELPERS
+    // -----------------------------------------------------------------------
+    function switchTab(tabKey) {
+      state.activeTab = tabKey;
+      saveAppState();
+      renderAll();
+      var scrollArea = document.getElementById('androidScrollArea');
+      if (scrollArea) scrollArea.scrollTop = 0;
+    }
+
+    function setLanguage(lang) {
+      state.lang = lang === 'en' ? 'en' : 'km';
+      saveAppState();
+      renderAll();
+    }
+
+    function setCurrency(curr) {
+      state.currency = curr === 'USD' ? 'USD' : 'KHR';
+      saveAppState();
+      renderAll();
+    }
+
+    function setDesktopShellMode(mode) {
+      state.desktopShellMode = mode === 'full' ? 'full' : 'phone';
+      saveAppState();
+      renderAll();
+    }
+
+    function updateAndroidStatusBarClock() {
+      var el = document.getElementById('androidClockText');
+      if (!el) return;
+      var now = new Date();
+      el.textContent = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: false });
+    }
+
+    function showToast(msg) {
+      var host = document.getElementById('androidToastHost');
+      if (!host) return;
+      var el = document.createElement('div');
+      el.className = 'px-4 py-2.5 rounded-full bg-inkCharcoal/95 text-goldBright border border-goldBright/70 text-xs font-bold shadow-xl text-center transition-all duration-200';
+      el.textContent = msg;
+      host.appendChild(el);
+
+      setTimeout(function () {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(6px)';
+        setTimeout(function () {
+          if (el.parentNode) el.parentNode.removeChild(el);
+        }, 220);
+      }, 2500);
+    }
+
+    // Boot Application
+    function bootAndroidApp() {
+      initAndroidPWAAndLogos();
+      updateAndroidStatusBarClock();
+      setInterval(updateAndroidStatusBarClock, 30000);
+      renderAll();
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', bootAndroidApp);
+    } else {
+      bootAndroidApp();
+    }
+  </script>
+</body>
+</html>
